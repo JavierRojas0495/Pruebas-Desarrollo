@@ -142,11 +142,11 @@
 /* 
     Este codigo se encarga del cambio de estado del usuario por medio del click en el boton
 */  
-    function postFuncion($ejecutar){
+    function postUsuario($ejecutar){
 
       let nombre = document.getElementById('nombre').value;
       let correo = document.getElementById('email').value;
-      let sexo = $('input[name="sexo"]:checked').val();
+      let sexo = $('input[name="sexo"]:checked').value;
       let area = document.getElementById('area').value;
       let numero_documento = document.getElementById('num_doc').value;
       let numero_telefono = document.getElementById('num_tel').value;
