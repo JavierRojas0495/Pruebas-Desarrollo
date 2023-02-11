@@ -26,6 +26,6 @@ El desarrollo tiene un mini framework y es basado en el modelo MVC
 El desarrollo tiene JavaScript,PHP,Jquery,SweetAlert,DataTable,Validaciones para campos vacios y numericos
  ============================================================================================
 
- Tener en cuenta que para ingresar a la web deben ir a localhost/ /web
+ Tener en cuenta que para ingresar a la web deben ir a localhost/ nombre de la carpeta (Pruebas-Desarrollo)  /web
 y de ahi ir a alguno de los modulos que deseen realizar seguimiento
  
