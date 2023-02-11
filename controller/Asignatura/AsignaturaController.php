@@ -34,4 +34,17 @@ class AsignaturaController{
         $datos = $this->gstAsignatura->inabilitarAsignatura($_POST['id']);
         return JSON_encode($datos);
     }
+
+    public function editarAsignatura(){ 
+        
+        $datosasignatura = $this->gstAsignatura->getAsignaturaId($_GET['id']);
+        $datos = $this->gstAsignatura->getAreas();
+        include_once '../view/Asignatura/Asignatura/editarAsignatura.php';
+    }
+
+    public function postEditarAsignatura(){
+
+        $datos = $this->gstAsignatura->postEditarAsignatura($_GET);
+        return JSON_encode($datos);   
+    }
 }

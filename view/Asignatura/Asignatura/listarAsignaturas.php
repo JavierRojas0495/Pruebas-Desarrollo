@@ -29,8 +29,7 @@
                         echo "<td>".$value['area']."</td>";
                         echo "<td>".$value['nivel']."</td>";
                         //echo "<td>".$value['nivel']."</td>";
-                        echo "<td>";
-                        //echo "<td> <input type='button' class='btn btn-primary' value='Editar' onclick='editarAsignatura(".$value['id'].");'>";
+                        echo "<td> <input type='button' class='btn btn-primary' value='Editar' onclick='editarAsignatura(".$value['id'].");'>";
                         echo " <input type='button' class='btn btn-danger' value='Eliminar' onclick='eliminarAsignatura(".$value['id'].");'></td>";
                         echo "</td>";
                         echo "</tr>";

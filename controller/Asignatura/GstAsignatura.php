@@ -49,10 +49,42 @@ Class GstAsignatura{
     }
 
     public function inabilitarAsignatura($id){
-        var_dump($id);
+        
         try{
             $sql =" UPDATE asignaturas SET estado = 'I' WHERE id = ".$id;
             var_dump($sql);
+            $resultado = $this->modelAsignatura->editar($sql); 
+            return $resultado;
+        }catch(Exception $e){
+            echo "Ocurrio un error";
+        }
+
+    }
+
+    public function getAsignaturaId($id){
+
+        try{
+            $sql =" SELECT id, nombre, area_id, descripcion, creditos, nivel, estado FROM asignaturas WHERE id = ".$id;
+            $resultado = $this->modelAsignatura->consultarArray($sql); 
+            return $resultado;
+        }catch(Exception $e){
+            echo "Ocurrio un error";
+        }
+
+    }
+
+    public function postEditarAsignatura($data){
+        
+        $id = $data["id"];
+        $nombre = $data['nombre'];
+        $area = $data['area'];
+        $descripcion = $data['descripcion'];
+        $creditos = $data['creditos'];
+        $nivel = $data['nivel'];
+        $estado = $data['estado'];
+
+        try{
+            $sql =" UPDATE asignaturas SET nombre = '$nombre', area_id = '$area', descripcion = '$descripcion', creditos = '$creditos', nivel = '$nivel',  estado = '$estado' WHERE id = ".$id;
             $resultado = $this->modelAsignatura->editar($sql); 
             return $resultado;
         }catch(Exception $e){

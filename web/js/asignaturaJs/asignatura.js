@@ -54,7 +54,7 @@ $(document).ready(function () {
   // ______________________________________________________________________________________________________________________________________________________ //
 
 
-  function postFuncion($ejecutar) {
+  function postAsignatura($ejecutar) {
 
     let nom_asig = document.getElementById('nombre').value;
     let area = document.getElementById('area').value;
@@ -108,14 +108,24 @@ $(document).ready(function () {
 
     } else {
 
-      $id_asig = document.getElementById('id').value;
-      if ($id_product == "" || $id_product == null || $id_product == undefined || Number.isInteger($id_product)) {
+      id_asig = document.getElementById('id').value;
+      estado = document.getElementById('estado').value;
+
+      if (id_asig == "" || id_asig == null || id_asig == undefined || Number.isInteger(id_asig) || isNumeric(id_asig)) {
         alertProcess('Notificación', "No se debe eliminar el campo del producto", 'error');
         setTimeout('document.location.reload()',2000);
         return false;
-      } 
+      }
+      
+      if (validaCampoVacio(estado) ) {
+  
+        alertProcess('Notificación', "El campo estado no puede estar vacio", 'error');
+        document.getElementById('estado').focus();
+        return false;
+    
+    }
 
-        postEditarAsignatura($id_asig,nom_asig,area,descripcion,creditos,nivel);
+      postEditarAsignatura(id_asig,nom_asig,area,descripcion,creditos,nivel,estado);
       
     }
 
@@ -185,4 +195,57 @@ function eliminarAsignatura(id){
               alertProcess('Notificación',"No se pudo eliminar",'error');
           }
       });
+  }
+
+  function editarAsignatura(id){
+    
+    Swal.fire({
+      title: 'seguro quieres editar?',
+      text: "Te llevara a la pagina de editar!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, editar esto!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            editarAsignaturaid(id);
+            return false;
+          }
+    })
+  }
+
+  function editarAsignaturaid(id){  
+
+    var url = "index.php?modulo=Asignatura&controlador=Asignatura&funcion=editarAsignatura&id="+id;
+    setTimeout("redireccionarPagina('"+url+"')", 500);
+  }
+
+  function postEditarAsignatura(id_asig,nom_asig,area,descripcion,creditos,nivel,estado){
+    
+      let data = {"id": id_asig,
+                  "nombre" : nom_asig,
+                  "area" : area,
+                  "descripcion" : descripcion,
+                  "creditos" : creditos,
+                  "nivel" : nivel,
+                  "estado" : estado
+            };
+      console.log(data);
+      $.ajax({
+            type:"GET",
+            url: "index.php?modulo=Asignatura&controlador=Asignatura&funcion=postEditarAsignatura",
+            data: data,
+            success:function(result){
+                alertProcess('Notificación',"Se edito correctamente",'success');
+                
+                url = 'index.php?modulo=Asignatura&controlador=Asignatura&funcion=listarAsignaturas';
+                setTimeout("redireccionarPagina('"+url+"')", 1000);
+                
+                   
+            }, error :function(result){
+                alertProcess('Notificación',"Ocurrio un error al registrar",'error');
+                setTimeout('document.location.reload()',2000);
+            }
+        });
   }

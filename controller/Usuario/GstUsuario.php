@@ -25,10 +25,6 @@ Class GstUsuario{
     }
 
     public function UpdateUsuario($datos){
-        var_dump($datos);
-        
-        
-        
         
         $id_usuario = $datos['id_usuario'];
         $nombre = $datos['nombre'];
@@ -70,22 +66,7 @@ Class GstUsuario{
     }
 
 
-    public function getNombreArea($datos){
-        
-        $i=0;
-        foreach($datos as $dato){
-            $sql = "select nombre from areas where id=".$dato['area_id'];
-            $resultados = $this->modelUsuario->ConsultarArray($sql);
-            foreach($resultados as $resultado){
-                $datos[$i]['area_descripcion'] = $resultado['nombre'];
-            }
-        $i++;
-        }
-        return $datos;
-    }
-
-    public function getAreas(){
-        
+   public function getAreas(){
         
         $sql = "select id,nombre from areas";
         $datos = $this->modelUsuario->consultarArray($sql);
@@ -93,7 +74,6 @@ Class GstUsuario{
     }
 
     public function postRegistrarUsuario($datos){
-        
         
         $nombre = $datos['nombre'];
         $email = $datos['correo'];

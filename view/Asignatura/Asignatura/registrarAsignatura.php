@@ -63,7 +63,7 @@
             
             <div class="input-group">  
                 <div class="form-group col-md-5">
-                    <input type='button' class='btn btn-success btnCrearUsuario' value='Guardar' onclick="postFuncion(1)">
+                    <input type='button' class='btn btn-success btnCrearUsuario' value='Guardar' onclick="postAsignatura(1)">
                 </div>
             </div>
 
