@@ -41,7 +41,7 @@ class UsuarioController{
 
     public function postEditarUsuario(){
         
-        $datos = $this->gstUsuario->UpdateUsuario($_GET);
+        $datos = $this->gstUsuario->UpdateUsuario($_POST);
         return JSON_encode($datos);
     }
 

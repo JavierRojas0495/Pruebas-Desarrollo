@@ -146,7 +146,8 @@
 
       let nombre = document.getElementById('nombre').value;
       let correo = document.getElementById('email').value;
-      let sexo = $('input[name="sexo"]:checked').value;
+      let sexo = $("input[name='sexo']:checked").val();
+      //let sexo = document.getElementById('sexo').value;
       let area = document.getElementById('area').value;
       let numero_documento = document.getElementById('num_doc').value;
       let numero_telefono = document.getElementById('num_tel').value;
@@ -175,7 +176,7 @@
           alertProcess('Notificación', "La dirección de correo  -" + correo + "-  es incorrecta.", 'error');
           return false;
 
-      }else if ( sexo == undefined || sexo == null || sexo == ""){
+      }else if ( validaVacio(sexo) ){
 
         document.getElementById('sexo').focus();
         alertProcess('Notificación', "El campo sexo no puede estar vacio", 'error');
@@ -247,7 +248,7 @@
     }
     
     function postCrearUsuario(nombre,correo,sexo,area,numero_documento,numero_telefono,direccion,ciudad,rol,semestre){
-      //$(".btnCrearUsuario").attr("disabled", true);
+      $(".btnCrearUsuario").attr("disabled", true);
       
       
 
@@ -262,7 +263,7 @@
                "rol" : rol,
                "semestre" : semestre
             };
-
+      
       $.ajax({
             type:"POST",
             url: "index.php?modulo=Usuario&controlador=Usuario&funcion=postCrearUsuario",
@@ -340,12 +341,12 @@
             };
          console.log(data);
         $.ajax({
-              type:"get",
+              type:"POST",
               url: "index.php?modulo=Usuario&controlador=Usuario&funcion=postEditarUsuario",
               data: data,
               success:function(){
                 
-                  alertProcess('Notificación',"Se registro correctamente",'success');
+                  alertProcess('Notificación',"Se edito correctamente",'success');
                   url = 'index.php?modulo=Usuario&controlador=Usuario&funcion=listarUsuario';
                   setTimeout("redireccionarPagina('"+url+"')", 2000);
                   

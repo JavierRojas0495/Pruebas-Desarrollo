@@ -38,31 +38,20 @@
 
             <div class="form-group col-xl-5 col-md-5">
         
-                        <label>Sexo *</label>
-                    <?php if($value['sexo'] == 'F'){ ?>
+                <label>Sexo *</label>
+                
                     <div class="radio">
                         <label>
-                            <input type="radio" name="sexo" id="sexo" value="M"> Masculino
+                            <input type="radio" name="sexo" id="sexo" <?php if( $value['sexo'] === "M")  { echo 'checked="checked"'; } ?> value="M" > Masculino
                         </label>
                     </div>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="sexo" id="sexo" value="F" checked="checked"> Femenino
+                            <input type="radio" name="sexo" id="sexo" <?php if( $value['sexo'] === "F")  { echo 'checked="checked"'; } ?> value="F" > Femenino
                         </label>
                     </div>
-                    <?php } else{ ?>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="sexo" id="sexo" value="M" checked="checked"> Masculino
-                        </label>
-                        
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="sexo" id="sexo" value="F"> Femenino
-                        </label>
-                    </div>
-                    <?php } ?>
+                    
+                
                         
                     <p class="help-block">Sexo del usuario.</p>
 
@@ -144,7 +133,7 @@
      <?php } ?>    
         <div class="input-group">  
             <div class="form-group col-md-5">
-                <input type='button' class='btn btn-success btnEditarUsuario' value='Guardar' onclick='postFuncion(2)'>
+                <input type='button' class='btn btn-success btnEditarUsuario' value='Guardar' onclick='postUsuario(2)'>
             </div>
         </div>
     </div>

@@ -61,12 +61,11 @@ Class GstUsuario{
         
         $sql = " SELECT U.id, U.nombre as name, U.num_documento as documento, U.email as correo, R.nombre as rol, A.nombre as area, C.nombre as ciudad FROM usuario U INNER JOIN roles R ON R.id = U.rol INNER JOIN areas A ON A.id = U.area_id INNER JOIN ciudades C ON C.id = U.ciudad ";
         $datos = $this->modelUsuario->consultarArray($sql);
-        //$datos = $this->getNombreArea($datos);
         return $datos;
     }
 
-
-   public function getAreas(){
+    public function getAreas(){
+        
         
         $sql = "select id,nombre from areas";
         $datos = $this->modelUsuario->consultarArray($sql);
@@ -74,6 +73,7 @@ Class GstUsuario{
     }
 
     public function postRegistrarUsuario($datos){
+        
         
         $nombre = $datos['nombre'];
         $email = $datos['correo'];
@@ -85,9 +85,9 @@ Class GstUsuario{
         $ciudad = $datos['ciudad'];
         $rol = $datos['rol'];
         $semestre = $datos['semestre'];
-        
+            
         try{
-            $sql ="INSERT INTO usuario VALUES ('','$nombre','$email','$sexo',$area_id,'$numero_documento','$numero_telefono','$direccion',$ciudad,$rol,$semestre)";
+            $sql ="INSERT INTO usuario VALUES ('','$nombre','$email','$sexo',$area_id,'$numero_documento','$numero_telefono','$direccion',$ciudad,$rol,'$semestre')";
             $resultado = $this->modelUsuario->insertar($sql); 
             return $resultado;
         }catch(Exception $e){
