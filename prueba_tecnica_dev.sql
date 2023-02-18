@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-02-2023 a las 18:25:28
+-- Tiempo de generación: 18-02-2023 a las 22:22:20
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 7.4.30
 
@@ -42,7 +42,8 @@ INSERT INTO `areas` (`id`, `nombre`) VALUES
 (5, 'Desarrollo de Negocio'),
 (6, 'Proyectos'),
 (7, 'Servicios'),
-(8, 'Calidad');
+(8, 'Calidad'),
+(9, 'Consumidor');
 
 -- --------------------------------------------------------
 
@@ -95,7 +96,10 @@ INSERT INTO `categorias` (`id`, `nombre`) VALUES
 (3, 'Gaseosas'),
 (4, 'Carnes'),
 (5, 'Granos'),
-(6, 'Embutidos');
+(6, 'Embutidos'),
+(7, 'Lacteos'),
+(8, 'Aseo'),
+(9, 'Electrodomesticos');
 
 -- --------------------------------------------------------
 
@@ -135,6 +139,7 @@ CREATE TABLE `producto` (
   `prod_categoria` int(100) NOT NULL,
   `prod_stock` int(100) NOT NULL,
   `ruta_img` text NOT NULL,
+  `estado_producto` varchar(10) NOT NULL,
   `prod_fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -142,9 +147,11 @@ CREATE TABLE `producto` (
 -- Volcado de datos para la tabla `producto`
 --
 
-INSERT INTO `producto` (`id_prod`, `prod_nombre`, `prod_referencia`, `prod_precio`, `prod_peso`, `prod_categoria`, `prod_stock`, `ruta_img`, `prod_fecha_creacion`) VALUES
-(78, 'Gaseosa Cocacola', '56234112', 5000, '3', 1, 10, 'img/imgCargarProductos/img_18181833.jpg', '2023-02-18 23:18:33'),
-(77, 'Papas Margarita Pollo', '45128445', 2000, '250', 1, 0, 'img/imgCargarProductos/img_18170009.jpg', '2023-02-18 22:00:09');
+INSERT INTO `producto` (`id_prod`, `prod_nombre`, `prod_referencia`, `prod_precio`, `prod_peso`, `prod_categoria`, `prod_stock`, `ruta_img`, `estado_producto`, `prod_fecha_creacion`) VALUES
+(78, 'Gaseosa Cocacola', '56234112', 5000, '3', 1, 10, 'img/imgCargarProductos/img_18181833.jpg', 'A', '2023-02-18 23:18:33'),
+(79, 'Suavizante Suavitel', '451125ADDA', 25000, '5', 8, 10, 'img/imgCargarProductos/img_18215929.png', 'A', '2023-02-19 02:59:29'),
+(77, 'Papas Margarita Pollo', '45128445', 2000, '250', 1, 0, 'img/imgCargarProductos/img_18170009.jpg', 'A', '2023-02-18 22:00:09'),
+(80, 'Cafe ', '45SDFG9855', 6000, '2', 5, 2, 'img/imgCargarProductos/producto-sin-imagen.png', 'I', '2023-02-19 03:10:31');
 
 -- --------------------------------------------------------
 
@@ -169,7 +176,8 @@ INSERT INTO `roles` (`id`, `nombre`) VALUES
 (7, 'Auxiliar administrativo'),
 (8, 'Codirector'),
 (9, 'Profesor'),
-(10, 'Estudiante');
+(10, 'Estudiante'),
+(11, 'Consumidor');
 
 -- --------------------------------------------------------
 
@@ -188,6 +196,7 @@ CREATE TABLE `usuario` (
   `direccion` varchar(50) NOT NULL,
   `ciudad` int(50) NOT NULL,
   `rol` int(50) NOT NULL,
+  `ruta_img` varchar(255) NOT NULL,
   `semestre` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -195,10 +204,9 @@ CREATE TABLE `usuario` (
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id`, `nombre`, `email`, `sexo`, `area_id`, `num_documento`, `num_telefono`, `direccion`, `ciudad`, `rol`, `semestre`) VALUES
-(8, 'Javier Andrés Rojas Erazo', 'jare_123@hotmail.es', 'M', 2, '1144192322', '3173280247', 'Calle 46 # 10-51', 1, 10, '6'),
-(9, 'Maria Eliza Erazo Tovar', 'eliza180970@gmail.com', 'F', 8, '27220274', '3122136027', 'Calle 46 # 10-51', 4, 4, ''),
-(13, 'Maria Alejandra Guevara', 'alejandra2255@gmail.con', 'F', 8, '1061780336', '3207643011', 'Popayan', 5, 4, '');
+INSERT INTO `usuario` (`id`, `nombre`, `email`, `sexo`, `area_id`, `num_documento`, `num_telefono`, `direccion`, `ciudad`, `rol`, `ruta_img`, `semestre`) VALUES
+(15, 'Javier Andrés Rojas Erazo', 'jare_123@hotmail.com', 'F', 2, '123456789', '3173280247', 'Calle 46 # 10-51', 1, 1, 'img/imgCargarUsuarios/img_18215356.jpg', ''),
+(16, 'Maria Alejandra Guevara', 'alejandra2255@gmail.con', 'F', 8, '123456789', '3205521463', 'Calle 46 # 10-51', 5, 2, 'img/imgCargarUsuarios/usuario_sin_foto.jpg', '');
 
 -- --------------------------------------------------------
 
@@ -284,7 +292,7 @@ ALTER TABLE `ventas`
 -- AUTO_INCREMENT de la tabla `areas`
 --
 ALTER TABLE `areas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `asignaturas`
@@ -296,7 +304,7 @@ ALTER TABLE `asignaturas`
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `ciudades`
@@ -308,35 +316,25 @@ ALTER TABLE `ciudades`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id_prod` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `id_prod` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
   MODIFY `id_vent` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `usuario`
---
-ALTER TABLE `usuario`
-  ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`area_id`) REFERENCES `areas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
