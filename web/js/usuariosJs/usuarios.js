@@ -1,3 +1,13 @@
+$(document).ready(function () {
+
+  let img = document.getElementById('imagenPrevisualizacion').src;
+  
+  if(img === "" || img === undefined){
+    $imagenPrevisualizacion = document.querySelector("#imagenPrevisualizacion");  
+    $imagenPrevisualizacion.src = 'img/undraw_posting_photo.svg';
+  }
+});
+  
   $(document).ready(function () {
         $('#dataTableUsuarios').DataTable({
           language: {
@@ -22,6 +32,38 @@
           },
         });
     });
+
+    function uploadFile(ruta,form) {
+
+      return new Promise((resolve, reject) => {
+        let formData = new FormData(document.getElementById(form));
+        formData.append("file",formData.get("image"));
+        formData.append("ruta",ruta);
+        
+        $.ajax({
+          url: 'img/funciones/guardarImagen.php',
+          type: 'post',
+          data: formData,
+          contentType: false,
+          processData: false,
+          success: function(response) {
+            
+            let respuesta = JSON.parse(response);
+            /*
+            if (respuesta === false) {
+              alertProcess('Notificación',"Ocurrio un error al subir la imagen a servidor",'error');
+              setTimeout('document.location.reload()', 2000);
+              return false;
+            }
+            */
+            resolve(respuesta);
+          }
+        }
+        )
+      });
+        
+      
+    }
   
     // esta funcion sera usada para continuar con eventos (Crear eliminar etc)
     function alerta(accion,message){
@@ -176,7 +218,7 @@
           alertProcess('Notificación', "La dirección de correo  -" + correo + "-  es incorrecta.", 'error');
           return false;
 
-      }else if ( validaVacio(sexo) ){
+      }else if ( sexo === undefined || sexo === null ) {
 
         document.getElementById('sexo').focus();
         alertProcess('Notificación', "El campo sexo no puede estar vacio", 'error');
@@ -228,7 +270,19 @@
       }
       
       if($ejecutar == '1'){
-          postCrearUsuario(nombre,correo,sexo,area,numero_documento,numero_telefono,direccion,ciudad,rol,numero_semestre);
+
+          let imgVal = $('#image').val(); 
+          
+          if(imgVal === undefined || imgVal === '') {
+                pathImg='img/imgCargarUsuarios/usuario_sin_foto.jpg';
+                postCrearUsuario(nombre,correo,sexo,area,numero_documento,numero_telefono,direccion,ciudad,rol,numero_semestre,pathImg);
+          }else{
+            uploadFile("imgCargarUsuarios","formCrearUsuario")
+            .then((pathImg) => {
+              console.log(pathImg);
+              postCrearUsuario(nombre,correo,sexo,area,numero_documento,numero_telefono,direccion,ciudad,rol,numero_semestre,pathImg);
+            });
+          }
       }
       if($ejecutar == '2'){
 
@@ -247,12 +301,13 @@
       
     }
     
-    function postCrearUsuario(nombre,correo,sexo,area,numero_documento,numero_telefono,direccion,ciudad,rol,semestre){
+    function postCrearUsuario(nombre,correo,sexo,area,numero_documento,numero_telefono,direccion,ciudad,rol,semestre,ruta_img){
       $(".btnCrearUsuario").attr("disabled", true);
       
       
 
-     let data = { "nombre" : nombre,
+     let data = { 
+               "nombre" : nombre,
                "correo" : correo,
                "sexo" : sexo,
                "area" : area,
@@ -261,7 +316,8 @@
                "direccion" : direccion,
                "ciudad" : ciudad,
                "rol" : rol,
-               "semestre" : semestre
+               "semestre" : semestre,
+               "ruta_img" : ruta_img
             };
       
       $.ajax({

@@ -20,10 +20,11 @@ Class GstProducto{
         $prod_cat = $datos['prod_cat'];
         $prod_stock = $datos['prod_stock'];
         $prod_ruta_img = $datos['url_img'];
+        $prod_estado = 'A';
         $prod_fecha = date('Y-m-d H:i:s');
 
         try {
-            $sql ="insert into producto values ('0','$prod_nom','$prod_ref',$prod_prec,$prod_peso,'$prod_cat',$prod_stock,'$prod_ruta_img','$prod_fecha')";
+            $sql ="insert into producto values ('0','$prod_nom','$prod_ref',$prod_prec,$prod_peso,'$prod_cat',$prod_stock,'$prod_ruta_img','$prod_estado','$prod_fecha')";
             $resultado = $this->modelProducto->insertar($sql);
             return $resultado;
         }catch(Exception $e){
@@ -33,22 +34,20 @@ Class GstProducto{
     }
 
     public function consultarProductos(){
-        $sql = "SELECT P.id_prod, P.prod_nombre, P.prod_referencia, P.prod_precio, C.nombre as categoria, P.prod_stock, P.prod_fecha_creacion FROM producto P INNER JOIN categorias C ON C.id = P.prod_categoria";
+        $sql = "SELECT P.id_prod, P.prod_nombre, P.prod_referencia, P.prod_precio, C.nombre as categoria, P.prod_stock, P.prod_fecha_creacion FROM producto P INNER JOIN categorias C ON C.id = P.prod_categoria WHERE P.estado_producto = 'A' ";
         $datos = $this->modelProducto->consultarArray($sql);
         return $datos;
     }
 
     public function postEliminarProducto($id){
-        
-        $sql ="delete from producto where id_prod=".$id;
-
         try{
-            $resultado = $this->modelProducto->eliminar($sql);
+            $sql =" UPDATE producto SET estado_producto = 'I' WHERE id_prod = ".$id;
+            $resultado = $this->modelProducto->editar($sql); 
+            return $resultado;
         }catch(Exception $e){
-            echo "Error al eliminar producto";
+            echo "Ocurrio un error";
         }
-        return $resultado;
-        
+
     }
 
     public function consultarProducto($id){

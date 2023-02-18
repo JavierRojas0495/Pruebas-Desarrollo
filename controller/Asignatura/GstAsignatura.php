@@ -52,7 +52,6 @@ Class GstAsignatura{
         
         try{
             $sql =" UPDATE asignaturas SET estado = 'I' WHERE id = ".$id;
-            var_dump($sql);
             $resultado = $this->modelAsignatura->editar($sql); 
             return $resultado;
         }catch(Exception $e){

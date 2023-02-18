@@ -23,7 +23,7 @@
                     <img id="imagenPrevisualizacion" style=" width: 150px; height: auto " src="<?php echo $value['ruta_img']; ?>" />
                 </div>
                 <input type="file" name="image" id="image" class="form-control-file" accept="image/*">
-                <p class="help-block">Cambiar Del Imagen producto.</p>
+                <p class="help-block">Cambiar imagen del producto.</p>
             </div>
 
         </div>

@@ -11,8 +11,22 @@
             <div class="form-group col-md-7 col-lg-7" style="background-color: #BFF3F7">
                 <h3> Los campos con asteriscos (*) son obligatorios</h3>
             </div>
-             
+            
+            
             <div class="input-group">   
+                
+            <div class="form-group col-xl-5 col-md-5">
+                <label>Imagen Del Usuario </label>
+                <div>
+                    <img id="imagenPrevisualizacion" style=" width: 150px; height: auto "></img>
+                </div>
+                <input type="file" name="image" id="image" class="form-control-file" accept="image/png,image/jpeg">
+                <p class="help-block">Cambiar imagen de usuario.</p>
+            </div>
+
+            </div>
+
+            <div class="input-group">
 
                 <div class="form-group col-xl-5 col-md-5">
                     <label>Nombre Completo *</label>

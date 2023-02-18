@@ -85,9 +85,10 @@ Class GstUsuario{
         $ciudad = $datos['ciudad'];
         $rol = $datos['rol'];
         $semestre = $datos['semestre'];
+        $ruta_img = $datos['ruta_img'];
             
         try{
-            $sql ="INSERT INTO usuario VALUES ('','$nombre','$email','$sexo',$area_id,'$numero_documento','$numero_telefono','$direccion',$ciudad,$rol,'$semestre')";
+            $sql ="INSERT INTO usuario VALUES ('','$nombre','$email','$sexo',$area_id,'$numero_documento','$numero_telefono','$direccion',$ciudad,$rol,'$ruta_img','$semestre')";
             $resultado = $this->modelUsuario->insertar($sql); 
             return $resultado;
         }catch(Exception $e){
