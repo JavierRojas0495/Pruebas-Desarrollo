@@ -13,6 +13,7 @@ class ProductoController{
     
     public function crearProducto(){
         
+        $categorias = $this->gstProducto->getCategorias();
         include_once '../view/Producto/Producto/crearProducto.php';
     }
 
@@ -38,27 +39,29 @@ class ProductoController{
     public function vistaVentaProducto(){
 
         $data = $this->gstProducto->consultarProducto($_REQUEST["idProd"]);
-        include_once '../view/Producto/Producto/ventaProducto.php';
+        $categorias = $this->gstProducto->getCategorias();        
+        include_once '../view/Ventas/Ventas/ventaProducto.php';
     }
 
     public function postVentaProducto(){
         
         $data = $this->gstProducto->postVentaProducto($_REQUEST);
         $this->UpdateProducto();
-    }   
+    }
 
     public function UpdateProducto(){
         $update = $this->gstProducto->updateProductoVenta($_REQUEST);
     }
     
     public function vistaEditarProducto(){
+        $categorias = $this->gstProducto->getCategorias();
         $datos = $this->gstProducto->consultarProducto($_REQUEST['idProd']);
         include_once '../view/Producto/Producto/editarProducto.php';
     }
 
     public function postEditarProducto(){
         
-        $datos = $this->gstProducto->postEditarProducto($_REQUEST);
+        $datos = $this->gstProducto->postEditarProducto($_POST);
         return JSON_encode($datos);
     }
 

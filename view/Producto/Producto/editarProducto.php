@@ -1,5 +1,5 @@
 
-<form rule="formCrearProducto" name="formCrearProducto" id="formCrearProducto" action="postCrearProducto" method="post" enctype="multipart/form-data">
+<form rule="formEditarProducto" name="formEditarProducto" id="formEditarProducto" action="postEditarProducto" method="post" enctype="multipart/form-data">
     
     
     <div class="form-group">
@@ -14,6 +14,19 @@
         <?php foreach ($datos as $key => $value) { ?>
 
              <input type="hidden" name="idproducto" id="idproducto" value="<?php echo $value['id_prod']; ?>">
+
+        <div class="form-group col-xl-12 col-md-12 row">
+          
+            <div class="form-group col-xl-5 col-md-5">
+                <label>Imagen Del Producto </label>
+                <div>
+                    <img id="imagenPrevisualizacion" style=" width: 150px; height: auto " src="<?php echo $value['ruta_img']; ?>" />
+                </div>
+                <input type="file" name="image" id="image" class="form-control-file" accept="image/*">
+                <p class="help-block">Cambiar Del Imagen producto.</p>
+            </div>
+
+        </div>
 
         <div class="input-group"> 
 
@@ -50,9 +63,14 @@
         
         <div class="form-group col-xl-12 col-md-12 row">
           
-            <div class="form-group col-xl-5 col-md-5">
+            
+            <div class="form-group col-xl-5 col-md-5 form-area">
                 <label>Categoria *</label>
-                <input class="form-control" name="cat_producto" id="cat_producto" placeholder="Categoria" type="text" value="<?php echo $value['prod_categoria']; ?>" required="required">
+                <select class="form-control form-select" aria-label="Default select example" id="cat_producto" name="cat_producto" placeholder="Area" required="required">
+                    <?php foreach ($categorias as $key => $val) { ?>
+                        <option value="<?php echo $val['id']; ?>" <?php if($value['categoria'] == $val['id']){ echo 'selected="selected"'; } ?>><?php echo $val['nombre']; ?></option>
+                    <?php } ?>
+                </select>
                 <p class="help-block">Categoria del producto.</p>
             </div>
 

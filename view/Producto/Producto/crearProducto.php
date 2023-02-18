@@ -10,6 +10,19 @@
         <div class="form-group col-md-7 col-lg-7" style="background-color: #BFF3F7">
             <h3> Los campos con asteriscos (*) son obligatorios</h3>
         </div>
+
+        <div class="form-group col-xl-12 col-md-12 row">
+          
+            <div class="form-group col-xl-5 col-md-5">
+                <label>Imagen Del Producto </label>
+                <div>
+                    <img id="imagenPrevisualizacion" style=" width: 150px; height: auto "></img>
+                </div>
+                <input type="file" name="image" id="image" class="form-control-file" accept="image/png,image/jpeg">
+                <p class="help-block">Cambiar Del Imagen producto.</p>
+            </div>
+
+        </div>
          
         <div class="input-group">   
 
@@ -46,9 +59,14 @@
         
         <div class="form-group col-xl-12 col-md-12 row">
           
+            
             <div class="form-group col-xl-5 col-md-5">
                 <label>Categoria *</label>
-                <input class="form-control" name="cat_producto" id="cat_producto" placeholder="Categoria" type="text" required="required">
+                <select class="form-control form-select" aria-label="Default select example" id="cat_producto" name="cat_producto" placeholder="Categoria"  required="required">
+                    <?php foreach ($categorias as $key => $val) { ?>
+                        <option value="<?php echo $val['id']; ?>"><?php echo $val['nombre']; ?></option>
+                    <?php } ?>
+                </select>
                 <p class="help-block">Categoria del producto.</p>
             </div>
 

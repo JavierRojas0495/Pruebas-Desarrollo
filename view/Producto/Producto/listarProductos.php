@@ -27,7 +27,7 @@
                         echo "<td>".$value['prod_nombre']."</td>";
                         echo "<td>".$value['prod_referencia']."</td>";
                         echo "<td>".$value['prod_precio']."</td>";
-                        echo "<td>".$value['prod_categoria']."</td>";
+                        echo "<td>".$value['categoria']."</td>";
                         echo "<td>".$value['prod_stock']."</td>";
                         echo "<td>".$value['prod_fecha_creacion']."</td>";
                         echo "<td>" ;

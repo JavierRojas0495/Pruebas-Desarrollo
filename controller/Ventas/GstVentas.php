@@ -13,7 +13,7 @@ Class GstVentas{
 
     public function consultarVentasProductos() {
         
-        $sql = " SELECT vnt.id_prod,pr.prod_nombre, vnt.prod_ref, vnt.prod_prec, pr.prod_categoria,vnt.vnt_cant_prod, vnt_fecha, vnt_prec_total_prod FROM producto pr INNER JOIN ventas vnt ON pr.id_prod = vnt.id_prod ORDER BY 6 desc";
+        $sql = " SELECT VNT.id_prod, PR.prod_nombre, VNT.prod_ref, VNT.prod_prec, C.nombre as categoria , VNT.vnt_cant_prod, VNT.vnt_fecha, VNT.vnt_prec_total_prod, PR.ruta_img FROM producto PR INNER JOIN ventas VNT ON PR.id_prod = VNT.id_prod INNER JOIN categorias C ON PR.prod_categoria = C.id ORDER BY 6 desc ";
         $datos = $this->modelVentas->consultarArray($sql);
     
         return $datos;

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-02-2023 a las 22:17:28
+-- Tiempo de generación: 18-02-2023 a las 18:25:28
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 7.4.30
 
@@ -67,7 +67,35 @@ CREATE TABLE `asignaturas` (
 INSERT INTO `asignaturas` (`id`, `nombre`, `area_id`, `descripcion`, `creditos`, `nivel`, `estado`) VALUES
 (1, 'Matematicas', 2, 'Matematicas', 40, 'Obligatoria', 'A'),
 (6, 'Castellano', 8, 'Castellano', 15, 'Obligatoria', 'A'),
-(7, 'Ingles', 8, 'Ingles', 10, 'Obligatoria', 'A');
+(7, 'Ingles', 8, 'Ingles', 10, 'Obligatoria', 'A'),
+(8, 'Prueba', 1, 'a', 1, 'Lectiva', 'I'),
+(9, 'asdasd', 2, '1', 1, 'Lectiva', 'I'),
+(10, 'Administracion de empresas', 8, 'Pruebas', 6, 'Lectiva', 'A'),
+(11, 'Administracion de empresas', 8, 'a', 6, 'Lectiva', 'I'),
+(12, 'Proyectos', 6, 'Proyectos', 5, 'Lectiva', 'I');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `categorias`
+--
+
+CREATE TABLE `categorias` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(255) COLLATE utf8mb4_spanish2_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `categorias`
+--
+
+INSERT INTO `categorias` (`id`, `nombre`) VALUES
+(1, 'Bebidas'),
+(2, 'Frituras'),
+(3, 'Gaseosas'),
+(4, 'Carnes'),
+(5, 'Granos'),
+(6, 'Embutidos');
 
 -- --------------------------------------------------------
 
@@ -88,7 +116,9 @@ INSERT INTO `ciudades` (`id`, `nombre`) VALUES
 (1, 'Cali'),
 (2, 'Medellin'),
 (3, 'Bogota'),
-(4, 'Pasto');
+(4, 'Pasto'),
+(5, 'Popayan'),
+(6, 'Palmira');
 
 -- --------------------------------------------------------
 
@@ -102,8 +132,9 @@ CREATE TABLE `producto` (
   `prod_referencia` varchar(100) NOT NULL,
   `prod_precio` int(100) NOT NULL,
   `prod_peso` varchar(100) NOT NULL,
-  `prod_categoria` varchar(100) NOT NULL,
+  `prod_categoria` int(100) NOT NULL,
   `prod_stock` int(100) NOT NULL,
+  `ruta_img` text NOT NULL,
   `prod_fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -111,12 +142,9 @@ CREATE TABLE `producto` (
 -- Volcado de datos para la tabla `producto`
 --
 
-INSERT INTO `producto` (`id_prod`, `prod_nombre`, `prod_referencia`, `prod_precio`, `prod_peso`, `prod_categoria`, `prod_stock`, `prod_fecha_creacion`) VALUES
-(6, 'Carne En Salsa', '45SDFG9855', 12000, '500', 'Carnes', 17, '2022-10-08 07:15:37'),
-(7, 'Michelada', '421565SJA', 7000, '10', 'Bebidas', 12, '2022-10-08 20:17:27'),
-(8, 'Cafe ', '54122SAS', 3000, '6', 'Bebidas', 65, '2022-10-08 20:24:40'),
-(9, 'Margarita', '784236AHSA', 35000, '6', 'Bebidas', 8, '2022-10-08 20:33:20'),
-(11, 'Carne Asada', '45123SAS', 25000, '250', 'Carnes', 20, '2022-10-08 20:44:54');
+INSERT INTO `producto` (`id_prod`, `prod_nombre`, `prod_referencia`, `prod_precio`, `prod_peso`, `prod_categoria`, `prod_stock`, `ruta_img`, `prod_fecha_creacion`) VALUES
+(78, 'Gaseosa Cocacola', '56234112', 5000, '3', 1, 10, 'img/imgCargarProductos/img_18181833.jpg', '2023-02-18 23:18:33'),
+(77, 'Papas Margarita Pollo', '45128445', 2000, '250', 1, 0, 'img/imgCargarProductos/img_18170009.jpg', '2023-02-18 22:00:09');
 
 -- --------------------------------------------------------
 
@@ -169,7 +197,8 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`id`, `nombre`, `email`, `sexo`, `area_id`, `num_documento`, `num_telefono`, `direccion`, `ciudad`, `rol`, `semestre`) VALUES
 (8, 'Javier Andrés Rojas Erazo', 'jare_123@hotmail.es', 'M', 2, '1144192322', '3173280247', 'Calle 46 # 10-51', 1, 10, '6'),
-(9, 'Maria Eliza Erazo Tovar', 'eliza180970@gmail.com', 'F', 8, '27220274', '3122136027', 'Calle 46 # 10-51', 4, 4, '');
+(9, 'Maria Eliza Erazo Tovar', 'eliza180970@gmail.com', 'F', 8, '27220274', '3122136027', 'Calle 46 # 10-51', 4, 4, ''),
+(13, 'Maria Alejandra Guevara', 'alejandra2255@gmail.con', 'F', 8, '1061780336', '3207643011', 'Popayan', 5, 4, '');
 
 -- --------------------------------------------------------
 
@@ -192,11 +221,8 @@ CREATE TABLE `ventas` (
 --
 
 INSERT INTO `ventas` (`id_vent`, `id_prod`, `prod_ref`, `prod_prec`, `vnt_cant_prod`, `vnt_prec_total_prod`, `vnt_fecha`) VALUES
-(37, 11, '45123SAS', 25000, '5', 125000, '2022-10-08 21:28:22'),
-(38, 6, '45SDFG9855', 12000, '5', 60000, '2022-10-08 21:37:58'),
-(39, 7, '421565SJA', 7000, '3', 21000, '2022-10-08 21:38:12'),
-(40, 9, '784236AHSA', 35000, '2', 70000, '2022-10-08 21:38:22'),
-(41, 6, '45SDFG9855', 12000, '3', 36000, '2022-10-08 21:39:35');
+(43, 78, '56234112', 5000, '2', 10000, '2023-02-18 23:18:50'),
+(42, 77, '45128445', 2000, '2', 4000, '2023-02-18 22:51:10');
 
 --
 -- Índices para tablas volcadas
@@ -212,6 +238,12 @@ ALTER TABLE `areas`
 -- Indices de la tabla `asignaturas`
 --
 ALTER TABLE `asignaturas`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `categorias`
+--
+ALTER TABLE `categorias`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -258,19 +290,25 @@ ALTER TABLE `areas`
 -- AUTO_INCREMENT de la tabla `asignaturas`
 --
 ALTER TABLE `asignaturas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT de la tabla `categorias`
+--
+ALTER TABLE `categorias`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `ciudades`
 --
 ALTER TABLE `ciudades`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id_prod` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_prod` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -282,13 +320,13 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `id_vent` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id_vent` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- Restricciones para tablas volcadas

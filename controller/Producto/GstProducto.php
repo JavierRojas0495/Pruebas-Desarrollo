@@ -19,20 +19,21 @@ Class GstProducto{
         $prod_peso = $datos['prod_peso'];
         $prod_cat = $datos['prod_cat'];
         $prod_stock = $datos['prod_stock'];
+        $prod_ruta_img = $datos['url_img'];
         $prod_fecha = date('Y-m-d H:i:s');
 
         try {
-            $sql ="insert into producto values ('0','$prod_nom','$prod_ref',$prod_prec,$prod_peso,'$prod_cat',$prod_stock,'$prod_fecha')";
-            $resultado = $this->modelProducto->insertar($sql); 
+            $sql ="insert into producto values ('0','$prod_nom','$prod_ref',$prod_prec,$prod_peso,'$prod_cat',$prod_stock,'$prod_ruta_img','$prod_fecha')";
+            $resultado = $this->modelProducto->insertar($sql);
             return $resultado;
         }catch(Exception $e){
             echo "Error al insertar producto";
-            var_dump($e);
         }
+        
     }
 
     public function consultarProductos(){
-        $sql = "select id_prod, prod_nombre,prod_referencia, prod_precio, prod_categoria, prod_stock, prod_fecha_creacion from producto";
+        $sql = "SELECT P.id_prod, P.prod_nombre, P.prod_referencia, P.prod_precio, C.nombre as categoria, P.prod_stock, P.prod_fecha_creacion FROM producto P INNER JOIN categorias C ON C.id = P.prod_categoria";
         $datos = $this->modelProducto->consultarArray($sql);
         return $datos;
     }
@@ -52,7 +53,7 @@ Class GstProducto{
 
     public function consultarProducto($id){
 
-        $sql = "select id_prod, prod_nombre,prod_referencia, prod_peso, prod_precio, prod_categoria, prod_stock from producto where id_prod=".$id;
+        $sql = " SELECT P.id_prod, P.prod_nombre, P.prod_referencia, P.prod_peso, P.prod_precio, C.id as categoria, P.prod_stock, P.ruta_img FROM producto P INNER JOIN categorias C ON C.id = P.prod_categoria WHERE P.id_prod = ".$id;
         $datos = $this->modelProducto->consultarArray($sql);
         return $datos;
 
@@ -108,10 +109,15 @@ Class GstProducto{
         $prod_peso = $datos['prod_peso'];
         $prod_cat = $datos['prod_cat'];
         $prod_stock = $datos['prod_stock'];
+        $prod_ruta_img = $datos['url_img'];
         
-        try {
+        if($prod_ruta_img === "false"){
             $sql ="Update producto set prod_nombre = '$prod_nom', prod_referencia = '$prod_ref', prod_precio = $prod_prec, prod_peso = $prod_peso, prod_categoria = '$prod_cat', prod_stock = $prod_stock  where id_prod=".$id_prod;
-            $resultado = $this->modelProducto->editar($sql); 
+        }else{
+            $sql ="Update producto set prod_nombre = '$prod_nom', prod_referencia = '$prod_ref', prod_precio = $prod_prec, prod_peso = $prod_peso, prod_categoria = '$prod_cat', ruta_img= '$prod_ruta_img',  prod_stock = $prod_stock  where id_prod=".$id_prod;
+        }
+        try {
+           $resultado = $this->modelProducto->editar($sql); 
             return $resultado;
         }catch(Exception $e){
             echo "Error al editar producto";
@@ -120,7 +126,12 @@ Class GstProducto{
         
     }
 
-    
-
+    public function getCategorias(){
+        
+        $sql = " SELECT id,nombre FROM categorias";
+        $datos = $this->modelProducto->consultarArray($sql);
+        return $datos;
+        
+    }
 
 }

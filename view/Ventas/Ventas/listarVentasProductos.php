@@ -21,9 +21,10 @@
     
         <div class="form-group">
             
-            <table class="table table-bordered table-striped border-primary"  id="dataTable" name="dataTable" >
+            <table class="table table-bordered table-striped border-primary"  id="dataTableProductos" name="dataTableProductos" >
                 <thead>
                     <tr>
+                        <th><i class="fas fa-cart-plus"></i> Imagen Producto </th>
                         <th><i class="fas fa-cart-plus"></i> Producto </th>
                         <th><i class="fas fa-tag"></i> Referencia </th>
                         <th><i class="fas fa-briefcase"></i> Categoria </th>
@@ -38,9 +39,13 @@
                 <?php
                     foreach ($datos as $key => $value) {
                         echo "<tr>";
+                        
+                        echo "<td>";
+                        echo '<img loading="lazy" src="'.$value['ruta_img'].'" alt="Elemento de Descarga" width="50px" height="50px">';
+                        echo "</td>";
                         echo "<td>".$value['prod_nombre']."</td>";
                         echo "<td>".$value['prod_ref']."</td>";
-                        echo "<td>".$value['prod_categoria']."</td>";
+                        echo "<td>".$value['categoria']."</td>";
                         echo "<td>".$value['vnt_cant_prod']."</td>";
                         echo "<td>".$value['prod_prec']."</td>";
                         echo "<td>".$value['vnt_prec_total_prod']."</td>";

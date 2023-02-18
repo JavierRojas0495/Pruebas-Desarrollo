@@ -41,7 +41,11 @@
 
             <div class="form-group col-xl-4 col-md-4">
                 <label>Categoria *</label>
-                <input class="form-control" name="cat_producto" id="cat_producto" placeholder="Categoria" type="text" required="required" value="<?php echo $value['prod_categoria']; ?>" readonly="true">
+                <select class="form-control form-select" aria-label="Default select example" id="cat_producto" name="cat_producto" placeholder="Area" required="required" readonly="true" >
+                    <?php foreach ($categorias as $key => $val) { ?>
+                        <option value="<?php echo $val['id']; ?>" <?php if($value['categoria'] == $val['id']){ echo 'selected="selected"'; } ?>><?php echo $val['nombre']; ?></option>
+                    <?php } ?>
+                </select>
                 <p class="help-block">Categoria del producto.</p>
             </div>
 
