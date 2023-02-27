@@ -30,17 +30,22 @@ class ProductoController{
         include_once '../view/Producto/Producto/listarProductos.php';
     }
 
+    public function vistaEditarProducto(){
+        $categorias = $this->gstProducto->getCategorias();
+        $datos = $this->gstProducto->consultarProducto($_REQUEST['idProd']);
+        include_once '../view/Producto/Producto/editarProducto.php';
+    }
+
+    public function postEditarProducto(){
+        
+        $datos = $this->gstProducto->postEditarProducto($_POST);
+        return JSON_encode($datos);
+    }
+    
     public function postEliminarProducto(){
         
         $datos = $this->gstProducto->postEliminarProducto($_POST['id']);
         return JSON_encode($datos);
-    }
-
-    public function vistaVentaProducto(){
-
-        $data = $this->gstProducto->consultarProducto($_REQUEST["idProd"]);
-        $categorias = $this->gstProducto->getCategorias();        
-        include_once '../view/Ventas/Ventas/ventaProducto.php';
     }
 
     public function postVentaProducto(){
@@ -53,16 +58,5 @@ class ProductoController{
         $update = $this->gstProducto->updateProductoVenta($_REQUEST);
     }
     
-    public function vistaEditarProducto(){
-        $categorias = $this->gstProducto->getCategorias();
-        $datos = $this->gstProducto->consultarProducto($_REQUEST['idProd']);
-        include_once '../view/Producto/Producto/editarProducto.php';
-    }
-
-    public function postEditarProducto(){
-        
-        $datos = $this->gstProducto->postEditarProducto($_POST);
-        return JSON_encode($datos);
-    }
 
 }

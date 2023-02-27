@@ -24,14 +24,13 @@
             <table class="table table-bordered table-striped border-primary"  id="dataTableProductos" name="dataTableProductos" >
                 <thead>
                     <tr>
-                        <th><i class="fas fa-cart-plus"></i> Imagen Producto </th>
                         <th><i class="fas fa-cart-plus"></i> Producto </th>
                         <th><i class="fas fa-tag"></i> Referencia </th>
                         <th><i class="fas fa-briefcase"></i> Categoria </th>
                         <th><i class="fas fa-chart-pie"></i> Cantidad </th>
                         <th><i class="far fa-money-bill-alt"></i> Precio</th>
-                        <th><i class="fas fa-chart-pie"></i> Total Venta </th>
-                        <th><i class="far fa-calendar-alt"></i> Fecha Venta </th>
+                        <th><i class="far fa-calendar-alt"></i> Estado </th>
+                        <th><i class="far fa-calendar-alt"></i> Opciones </th>
                         
                     </tr>
                 </thead>
@@ -39,17 +38,17 @@
                 <?php
                     foreach ($datos as $key => $value) {
                         echo "<tr>";
-                        
-                        echo "<td>";
-                        echo '<img loading="lazy" src="'.$value['ruta_img'].'" alt="Elemento de Descarga" width="50px" height="50px">';
-                        echo "</td>";
-                        echo "<td>".$value['prod_nombre']."</td>";
+                        echo "<td>".'<img loading="lazy" src="'.$value['ruta_img'].'" alt="Elemento de Descarga" width="50px" height="50px">  '.$value['prod_nombre']."</td>";
                         echo "<td>".$value['prod_ref']."</td>";
                         echo "<td>".$value['categoria']."</td>";
                         echo "<td>".$value['vnt_cant_prod']."</td>";
                         echo "<td>".$value['prod_prec']."</td>";
-                        echo "<td>".$value['vnt_prec_total_prod']."</td>";
-                        echo "<td>".$value['vnt_fecha']."</td>";
+                        echo "<td style='text-align: center'; >";
+                                if($value['estado'] == 'A') { echo "ACTIVO";}else { echo "INACTIVO";}
+                        "</td>";
+                        echo "<td style='text-align: center';>";
+                        echo " <a type='button' class='btn btn-info' onclick='eliminarUsuarios(".$value['id_prod'].");'> Cambiar Estado </a>";
+                        echo "</td>";
                         echo "</tr>";
                     }
                     ?>

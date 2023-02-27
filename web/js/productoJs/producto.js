@@ -1,75 +1,75 @@
 $(document).ready(function () {
 
   let img = document.getElementById('imagenPrevisualizacion').src;
-  
-  if(img === "" || img === undefined){
-    $imagenPrevisualizacion = document.querySelector("#imagenPrevisualizacion");  
+
+  if (img === "" || img === undefined) {
+    $imagenPrevisualizacion = document.querySelector("#imagenPrevisualizacion");
     $imagenPrevisualizacion.src = 'img/undraw_posting_photo.svg';
   }
 
-  
+
 });
 
 $(document).ready(function () {
   $('#dataTableProductos').DataTable({
     language: {
-        "decimal": "",
-        "emptyTable": "Sin Información",
-        "info": "Registros _START_ de _TOTAL_ Registros",
-        "infoEmpty": "Registros 0 to 0 of 0 Registros",
-        "infoFiltered": "(Filtrado de _MAX_ total registros)",
-        "infoPostFix": "",
-        "thousands": ",",
-        "lengthMenu": "Cantidad _MENU_",
-        "loadingRecords": "Cargando...",
-        "processing": "Procesando...",
-        "search": "Buscar:",
-        "zeroRecords": "Sin resultados",
-        "paginate": {
-            "first": "Primero",
-            "last": "Ultimo",
-            "next": "Siguiente",
-            "previous": "Anterior"
-        }
+      "decimal": "",
+      "emptyTable": "Sin Información",
+      "info": "Registros _START_ de _TOTAL_ Registros",
+      "infoEmpty": "Registros 0 to 0 of 0 Registros",
+      "infoFiltered": "(Filtrado de _MAX_ total registros)",
+      "infoPostFix": "",
+      "thousands": ",",
+      "lengthMenu": "Cantidad _MENU_",
+      "loadingRecords": "Cargando...",
+      "processing": "Procesando...",
+      "search": "Buscar:",
+      "zeroRecords": "Sin resultados",
+      "paginate": {
+        "first": "Primero",
+        "last": "Ultimo",
+        "next": "Siguiente",
+        "previous": "Anterior"
+      }
     },
   });
 });
 
 $(document).ready(function () {
 
-    const $seleccionArchivos = document.querySelector("#image"),
+  const $seleccionArchivos = document.querySelector("#image"),
     $imagenPrevisualizacion = document.querySelector("#imagenPrevisualizacion");
 
-    $seleccionArchivos.addEventListener("change", () => {
-        const archivos = $seleccionArchivos.files;
-            
-            if (!archivos || !archivos.length) {
-              $imagenPrevisualizacion.src = "";
-              return;
-            }
-      const primerArchivo = archivos[0];
-      
-      const objectURL = URL.createObjectURL(primerArchivo);
-      $imagenPrevisualizacion.src = objectURL;
-});
+  $seleccionArchivos.addEventListener("change", () => {
+    const archivos = $seleccionArchivos.files;
+
+    if (!archivos || !archivos.length) {
+      $imagenPrevisualizacion.src = "";
+      return;
+    }
+    const primerArchivo = archivos[0];
+
+    const objectURL = URL.createObjectURL(primerArchivo);
+    $imagenPrevisualizacion.src = objectURL;
+  });
 
 });
 
-function uploadFile(ruta,form) {
+function uploadFile(ruta, form) {
 
   return new Promise((resolve, reject) => {
     let formData = new FormData(document.getElementById(form));
-    formData.append("file",formData.get("image"));
-    formData.append("ruta",ruta);
-    
+    formData.append("file", formData.get("image"));
+    formData.append("ruta", ruta);
+
     $.ajax({
       url: 'img/funciones/guardarImagen.php',
       type: 'post',
       data: formData,
       contentType: false,
       processData: false,
-      success: function(response) {
-        
+      success: function (response) {
+
         let respuesta = JSON.parse(response);
         /*
         if (respuesta === false) {
@@ -83,8 +83,8 @@ function uploadFile(ruta,form) {
     }
     )
   });
-    
-  
+
+
 }
 
 function redireccionarPagina(url) {
@@ -123,7 +123,7 @@ function postProducto($ejecutar) {
   let peso_Prod = document.getElementById('peso_producto').value;
   let cat_Prod = document.getElementById('cat_producto').value;
   let stock_Prod = document.getElementById('stock_producto').value;
-  
+
   if (validaCampoVacio(nom_Prod)) {
     document.getElementById('nom_producto').focus();
     alertProcess('Notificación', "El campo nombre no puede estar vacio", 'error');
@@ -158,45 +158,45 @@ function postProducto($ejecutar) {
     alertProcess('Notificación', "El campo stock no puede estar vacio y debe ser un numero mayor o igual a 0", 'error');
     return false;
   }
-  
-  
+
+
   if ($ejecutar == 'crear') {
-    
-    let imgVal = $('#image').val(); 
-    
-    if(imgVal === undefined || imgVal === '') {
-      pathImg='img/imgCargarProductos/producto-sin-imagen.png';
-      postCrearProducto(nom_Prod, ref_Prod, prec_Prod, peso_Prod, cat_Prod, stock_Prod,pathImg);  
-    }else{
-      uploadFile("imgCargarProductos","formCrearProducto")
-      .then((pathImg) => {
-        console.log(pathImg);
-        postCrearProducto(nom_Prod, ref_Prod, prec_Prod, peso_Prod, cat_Prod, stock_Prod,pathImg);  
-      });
+
+    let imgVal = $('#image').val();
+
+    if (imgVal === undefined || imgVal === '') {
+      pathImg = 'img/imgCargarProductos/producto-sin-imagen.png';
+      postCrearProducto(nom_Prod, ref_Prod, prec_Prod, peso_Prod, cat_Prod, stock_Prod, pathImg);
+    } else {
+      uploadFile("imgCargarProductos", "formCrearProducto")
+        .then((pathImg) => {
+          console.log(pathImg);
+          postCrearProducto(nom_Prod, ref_Prod, prec_Prod, peso_Prod, cat_Prod, stock_Prod, pathImg);
+        });
     }
-    
+
   } else {
-    
+
     $id_product = document.getElementById('idproducto').value;
     if ($id_product == "" || $id_product == null || $id_product == undefined || Number.isInteger($id_product)) {
       alertProcess('Notificación', "No se debe eliminar el campo del producto", 'error');
     } else {
-      
-      uploadFile("imgCargarProductos","formEditarProducto")
-      .then((pathImg) => {
-        postEditarProducto($id_product,nom_Prod, ref_Prod, prec_Prod, peso_Prod, cat_Prod, stock_Prod,pathImg);
-      });
-      
-      
+
+      uploadFile("imgCargarProductos", "formEditarProducto")
+        .then((pathImg) => {
+          postEditarProducto($id_product, nom_Prod, ref_Prod, prec_Prod, peso_Prod, cat_Prod, stock_Prod, pathImg);
+        });
+
+
     }
-    
+
   }
 }
 
 function postCrearProducto(nom_Prod, ref_Prod, prec_Prod, peso_Prod, cat_Prod, stock_Prod, rutaImg) {
-  
+
   $(".btnCrearProducto").attr("disabled", true);
-  
+
   data = {
     "prod_nombre": nom_Prod,
     "prod_ref": ref_Prod,
@@ -204,9 +204,9 @@ function postCrearProducto(nom_Prod, ref_Prod, prec_Prod, peso_Prod, cat_Prod, s
     "prod_peso": peso_Prod,
     "prod_cat": cat_Prod,
     "prod_stock": stock_Prod,
-    "url_img": rutaImg, 
+    "url_img": rutaImg,
   };
-  
+
   $.ajax({
     type: "POST",
     url: "index.php?modulo=Producto&controlador=Producto&funcion=postCrearProducto",
@@ -215,8 +215,8 @@ function postCrearProducto(nom_Prod, ref_Prod, prec_Prod, peso_Prod, cat_Prod, s
       alertProcess('Notificación', "Se registro correctamente el producto", 'success');
 
       url = 'index.php?modulo=Producto&controlador=Producto&funcion=listarProductos';
-      setTimeout("redireccionarPagina('"+url+"')", 2000);
-      
+      setTimeout("redireccionarPagina('" + url + "')", 2000);
+
     }, error: function (result) {
       alertProcess('Notificación', "No se pudo registrar el producto", 'error');
       setTimeout('document.location.reload()', 2000);
@@ -225,10 +225,10 @@ function postCrearProducto(nom_Prod, ref_Prod, prec_Prod, peso_Prod, cat_Prod, s
 
 }
 
-function postEditarProducto($id_product,nom_Prod, ref_Prod, prec_Prod, peso_Prod, cat_Prod, stock_Prod, rutaImg){
-  
+function postEditarProducto($id_product, nom_Prod, ref_Prod, prec_Prod, peso_Prod, cat_Prod, stock_Prod, rutaImg) {
+
   $(".btnEditarProducto").attr("disabled", true);
-  
+
   data = {
     "prod_id": $id_product,
     "prod_nombre": nom_Prod,
@@ -237,7 +237,7 @@ function postEditarProducto($id_product,nom_Prod, ref_Prod, prec_Prod, peso_Prod
     "prod_peso": peso_Prod,
     "prod_cat": cat_Prod,
     "prod_stock": stock_Prod,
-    "url_img": rutaImg, 
+    "url_img": rutaImg,
   };
 
   $.ajax({
@@ -248,7 +248,7 @@ function postEditarProducto($id_product,nom_Prod, ref_Prod, prec_Prod, peso_Prod
 
       alertProcess('Notificación', "Se edito correctamente el producto", 'success');
       url = 'index.php?modulo=Producto&controlador=Producto&funcion=listarProductos';
-      setTimeout("redireccionarPagina('"+url+"')", 2000);
+      setTimeout("redireccionarPagina('" + url + "')", 2000);
 
     }, error: function (result) {
       alertProcess('Notificación', "No se pudo registrar el producto", 'error');
@@ -303,8 +303,8 @@ function ventaProducto(id) {
     confirmButtonText: 'Si, vender esto!'
   }).then((result) => {
     if (result.isConfirmed) {
-      var url = "index.php?modulo=Producto&controlador=Producto&funcion=vistaVentaProducto&idProd=" + id;
-      setTimeout("redireccionarPagina('"+url+"')", 500);
+      var url = "index.php?modulo=Ventas&controlador=Ventas&funcion=vistaVentaProducto&idProd=" + id;
+      setTimeout("redireccionarPagina('" + url + "')", 500);
     }
   })
 }
@@ -343,8 +343,8 @@ function postVentaProducto() {
 
 
   if (parseInt(stock_Prod) - parseInt(cant_prod) < 0) {
-      alertProcess('Notificación', "Sin unidades suficientes para esta compra.", "error");
-      return;
+    alertProcess('Notificación', "Sin unidades suficientes para esta compra.", "error");
+    return;
   }
   if (parseInt(cant_prod) <= 0) {
     alertProcess('Notificación', "Sin unidades para esta compra.", "error");
@@ -368,7 +368,7 @@ function postVentaProducto() {
 
       alertProcess('Notificación', "Se realizo la venta correctamente", 'success');
       url = 'index.php?modulo=Producto&controlador=Producto&funcion=listarProductos';
-      setTimeout("redireccionarPagina('"+url+"')", 2000);
+      setTimeout("redireccionarPagina('" + url + "')", 2000);
 
 
     }, error: function (result) {
@@ -392,14 +392,14 @@ function editarProducto(id) {
     confirmButtonText: 'Si, editar esto!'
   }).then((result) => {
     if (result.isConfirmed) {
-        vistaEditarProducto(id);
+      vistaEditarProducto(id);
     }
   })
 }
 function vistaEditarProducto(id) {
 
   var url = "index.php?modulo=Producto&controlador=Producto&funcion=vistaEditarProducto&idProd=" + id;
-  setTimeout("redireccionarPagina('"+url+"')", 500);
+  setTimeout("redireccionarPagina('" + url + "')", 500);
 
 }
 

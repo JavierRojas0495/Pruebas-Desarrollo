@@ -82,6 +82,7 @@
                 <div id="collapseVenta" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Modulo De Ventas:</h6>
+                        <a class="collapse-item" href="<?php echo getUrl("Ventas", "Ventas", "tiendaVirtual"); ?>">Entrar A La Tienda</a>
                         <a class="collapse-item" href="<?php echo getUrl("Ventas", "Ventas", "listarVentasProductos"); ?>">Lista De Ventas</a>
                     </div>
                 </div>

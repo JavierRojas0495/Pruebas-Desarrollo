@@ -4,11 +4,7 @@
     
     <div class="form-group">
         <div class="form-group">
-                <h1 class="page-header"> Vender Producto </h1>
-        </div>
-        
-        <div class="form-group col-md-7 col-lg-7" style="background-color: #BFF3F7">
-            <h3> Los campos con asteriscos (*) son obligatorios</h3>
+                <h1 class="page-header"> Asignar Producto A La Tienda </h1>
         </div>
         
         <?php foreach ($data as $key => $value) { ?>
@@ -17,13 +13,13 @@
             <div class="input-group">   
 
             <div class="form-group col-xl-6 col-md-6">
-                <label>Nombre Producto *</label>
+                <label>Nombre Producto </label>
                 <input class="form-control" name="nom_producto" id="nom_producto" placeholder="Producto" type="text" required="required" value="<?php echo $value['prod_nombre']; ?>" readonly="true">
                 <p class="help-block">Nombre del producto.</p>
             </div>
 
             <div class="form-group col-xl-6 col-md-6">
-                <label>Referencia Producto *</label>
+                <label>Referencia Producto </label>
                 <input class="form-control" name="ref_producto" id="ref_producto" placeholder="Referencia" type="text" required="required" value="<?php echo $value['prod_referencia']; ?>" readonly="true">
                 <p class="help-block">Referencia del producto.</p>
             </div>
@@ -34,13 +30,13 @@
         <div class="form-group col-xl-12 col-md-12 row">
           
             <div class="form-group col-xl-4 col-md-4">
-                <label>Precio Producto *</label>
+                <label>Precio Producto </label>
                 <input class="form-control" name="prec_producto" id="prec_producto" placeholder="Precio" type="number" required="required" value="<?php echo $value['prod_precio']; ?>" readonly="true">
                 <p class="help-block">Precio del producto.</p>
             </div>
 
             <div class="form-group col-xl-4 col-md-4">
-                <label>Categoria *</label>
+                <label>Categoria </label>
                 <select class="form-control form-select" aria-label="Default select example" id="cat_producto" name="cat_producto" placeholder="Area" required="required" readonly="true" >
                     <?php foreach ($categorias as $key => $val) { ?>
                         <option value="<?php echo $val['id']; ?>" <?php if($value['categoria'] == $val['id']){ echo 'selected="selected"'; } ?>><?php echo $val['nombre']; ?></option>
@@ -69,7 +65,7 @@
             <div class="form-group col-xl-5 col-md-5">
                 <label>Precio Ventas *</label>
                 <input class="form-control" name="prec_venta" id="prec_venta" placeholder="Precio Venta" type="number" required="required" readonly="true">
-                <p class="help-block">Stock del producto.</p>
+                <p class="help-block">Total Por Venta.</p>
             </div>
         
         </div>
@@ -79,7 +75,7 @@
         
         <div class="input-group">  
             <div class="form-group col-md-5">
-                <input type='button' class='btn btn-success btnCrearProducto' value='Vender Producto' onclick='postVentaProducto()'>
+                <input type='button' class='btn btn-success btnCrearProducto' value='Venta' onclick='postVentaProducto()'>
                 <a class='btn btn-danger' href="<?php echo getUrl("Producto", "Producto", "listarProductos"); ?>" >Cancelar</a></button>
             </div>
         </div>

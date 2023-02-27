@@ -1,12 +1,13 @@
 <?php
 include_once '../lib/helpers.php';
 include_once '../view/Partials/head.php';
+include_once '../view/Partials/navbar.php';
 ?>
 <body>
     <div id="wrapper">
         <!-- Navigation -->
         <?php
-        include_once '../view/Partials/sidebar-left.php';
+            include_once '../view/Partials/sidebar-left.php';
         ?>
         <div class="container-fluid">
             <div id="page-wrapper">

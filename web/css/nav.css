@@ -1,0 +1,30 @@
+#nav-link {
+
+    color: aliceblue;
+}
+
+.bg-dark {
+    background-color: #4e73df !important;
+}
+
+a {
+    color: #f8f9fc;
+    font-weight: bold;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+a:hover {
+
+    color: #000000;
+}
+
+a :active {
+
+    color: black;
+}
+
+.nav-link.active {
+    color: #030000 !important;
+    background-color: #f8f8f8 !important;
+}

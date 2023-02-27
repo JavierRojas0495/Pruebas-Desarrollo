@@ -58,26 +58,6 @@ Class GstProducto{
 
     }
 
-    public function postVentaProducto($data){
-
-        $id_prod = $data['id_prod'];
-        $cant_prod = $data['cant_prod'];
-        $prod_ref = $data['ref_prod'];
-        $prod_prec = $data['prec_prod'];
-        $prod_total = $data['prec_venta'];
-        $prod_fecha_vnt = date('Y-m-d H:i:s');
-
-        try {
-            $sql ="insert into ventas values ('0',$id_prod,'$prod_ref',$prod_prec,$cant_prod,$prod_total,'$prod_fecha_vnt')";
-            $resultado = $this->modelProducto->insertar($sql); 
-            return $resultado;
-        }catch(Exception $e){
-            echo "Error al insertar venta";
-            var_dump($e);
-        }
-
-    }
-
     public function updateProductoVenta($data){
         
         $id_prod = $data['id_prod'];
