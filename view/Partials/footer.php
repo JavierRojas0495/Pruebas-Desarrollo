@@ -33,6 +33,7 @@
     <script src="../web/js/usuariosJs/usuarios.js"></script>
     <script src="../web/js/productoJs/producto.js"> </script>
     <script src="../web/js/asignaturaJs/asignatura.js"> </script>
+    <script src="../web/js/ventasJs/ventas.js"> </script>
 
     <!-- DataTables -->
     <script type="text/javascript" src="js/DataTables/datatables.min.js"></script>

@@ -15,12 +15,12 @@
                 <thead>
                     <tr>
                         <th><i class="fas fa-user"></i> Nombre </th>
-                        <th><i class="fas fa-user"></i> Numero Documento </th>
+                        <th><i class="fas fa-server"></i> Numero Documento </th>
                         <th><i class="fad fa-at"></i> Correo </th>
-                        <th><i class="fas fa-user"></i> Rol </th>
+                        <th><i class="fas fa-id-card"></i> Rol </th>
                         <th><i class="fas fa-briefcase"></i> Area</th>
-                        <th><i class="fas fa-briefcase"></i> Ciudad </th>
-                        <th><i class="far fa-user-cog"></i> Opciones</th>
+                        <th><i class="fas fa-globe"></i> Ciudad </th>
+                        <th><i class="fas fa-cogs"></i> Opciones</th>
                     </tr>
                 </thead>
                 <tbody>

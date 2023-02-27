@@ -14,15 +14,13 @@ Class GstVentas{
     public function postVentaProducto($data){
 
         $id_prod = $data['id_prod'];
-        $cant_prod = $data['cant_prod'];
         $prod_ref = $data['ref_prod'];
         $prod_prec = $data['prec_prod'];
-        $prod_total = $data['prec_venta'];
-        $prod_fecha_vnt = date('Y-m-d H:i:s');
-
+        $cant_prod = $data['cant_prod'];
+        
         try {
-            $sql ="insert into ventas values ('0',$id_prod,'$prod_ref',$prod_prec,$cant_prod,$prod_total,'$prod_fecha_vnt')";
-            $resultado = $this->modelProducto->insertar($sql); 
+            $sql ="insert into ventas values ('0',$id_prod,'$prod_ref',$prod_prec,$cant_prod,'A')";
+            $resultado = $this->modelVentas->insertar($sql); 
             return $resultado;
         }catch(Exception $e){
             echo "Error al insertar venta";
@@ -39,20 +37,22 @@ Class GstVentas{
     
         return $datos;
     }
-
-    public function productoMasVendido(){
-
-        $sql = "SELECT vnt.id_prod,pr.prod_nombre, vnt.prod_ref, vnt.prod_prec, pr.prod_categoria, sum(vnt.vnt_cant_prod) as vntTotal FROM producto pr INNER JOIN ventas vnt ON pr.id_prod = vnt.id_prod GROUP BY vnt.id_prod ORDER BY 6 desc limit 1";
-            $datos = $this->modelVentas->consultarArray($sql);
-            return $datos;
-    }
-
+    
     public function productoMasStock() {
-        $sql = "SELECT prod_nombre, prod_stock FROM producto ORDER BY 2 desc LIMIT 1";
+
+        $sql = " SELECT vnt.id_prod, pr.prod_nombre, sum(vnt.vnt_cant_prod) as vntTotal FROM producto pr INNER JOIN ventas vnt ON pr.id_prod = vnt.id_prod GROUP BY vnt.id_prod ORDER BY 3 desc limit 1 ";
             $datos = $this->modelVentas->consultarArray($sql);
             return $datos;
         
     }
+
+    public function productoMasVendido(){
+
+        $sql = " SELECT vnt.id_prod, pr.prod_nombre, sum(vnt.vnt_cant_prod) as vntTotal FROM producto pr INNER JOIN ventas vnt ON pr.id_prod = vnt.id_prod GROUP BY vnt.id_prod ORDER BY 3 asc limit 1 ";
+            $datos = $this->modelVentas->consultarArray($sql);
+            return $datos;
+    }
+
         
     
 

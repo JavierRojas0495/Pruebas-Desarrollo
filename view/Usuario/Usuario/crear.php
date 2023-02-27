@@ -8,7 +8,7 @@
                     <h1 class="page-header"> Registrar Usuario </h1>
             </div>
             
-            <div class="form-group col-md-7 col-lg-7" style="background-color: #BFF3F7">
+            <div class="form-group col-md-8 col-lg-10" style="background-color: #BFF3F7">
                 <h3> Los campos con asteriscos (*) son obligatorios</h3>
             </div>
             
@@ -66,9 +66,9 @@
                 </div>
             
 
-                <div class="form-group col-xl-5 col-md-5 form-area">
+                <div class="form-group col-xl-5 col-md-5 mx-2">
                     <label>Area *</label><br>
-                    <select class="form-control form-select" aria-label="Default select example" id="area" name="area" placeholder="Area" required="required">
+                    <select class="form-control" aria-label="Default select example" id="area" name="area" placeholder="Area" required="required">
                         <?php foreach ($datos as $key => $val) { ?>
                             <option value="<?php echo $val['id']; ?>"><?php echo $val['nombre']; ?></option>
                         <?php } ?>

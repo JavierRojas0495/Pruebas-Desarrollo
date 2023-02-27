@@ -60,9 +60,9 @@
 
         
 
-            <div class="form-group col-xl-5 col-md-5 form-area">
+            <div class="form-group col-xl-5 col-md-5 mx-2">
                 <label>Area *</label><br>
-                <select class="form-control form-select" aria-label="Default select example" id="area" name="area" placeholder="Area" required="required">
+                <select class="form-control" aria-label="Default select example" id="area" name="area" placeholder="Area" required="required">
                     <?php foreach ($areas as $key => $val) { ?>
                         <option value="<?php echo $val['id']; ?>" <?php if($value['area_id'] == $val['id']){ echo 'selected="selected"'; } ?>><?php echo $val['nombre']; ?></option>
                     <?php } ?>

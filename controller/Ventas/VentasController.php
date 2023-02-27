@@ -13,29 +13,35 @@ class VentasController{
  		$this->gstVentas = new GstVentas();
         $this->gstProducto = new GstProducto();
  	}
-
-
-    public function vistaVentaProducto(){
-
+     
+     
+     public function vistaVentaProducto(){
+         
         $data = $this->gstProducto->consultarProducto($_REQUEST["idProd"]);
         $categorias = $this->gstProducto->getCategorias();        
         include_once '../view/Ventas/Ventas/ventaProducto.php';
     }
 
+    public function postVentaProducto(){
+        
+        $data = $this->gstVentas->postVentaProducto($_REQUEST);
+        //$this->UpdateProducto();
+    }
+        
     Public function listarVentasProductos(){
-
+            
         $datos = $this->gstVentas->consultarVentasProductos();
-        $prodMasVnt = $this->gstVentas->productoMasVendido();
         $prodMasStock = $this->gstVentas->productoMasStock();
+        $prodMasVnt = $this->gstVentas->productoMasVendido();
         
         include_once '../view/Ventas/Ventas/listarVentasProductos.php';
     }
-
+    
     Public function tiendaVirtual(){
-
+    
         $datos = $this->gstVentas->consultarVentasProductos();
         include_once '../view/Ventas/Ventas/tiendaVirtual.php';
     }
-
-
+    
+    
 }

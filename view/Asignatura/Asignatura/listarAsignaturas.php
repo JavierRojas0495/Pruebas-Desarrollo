@@ -14,11 +14,11 @@
             <table id="dataTableAsignatura" class="table table-bordered table-striped border-primary">
                 <thead>
                     <tr>
-                        <th><i class="fas fa-user"></i> Nombre </th>
-                        <th><i class="fas fa-user"></i> Area </th>
-                        <th><i class="fas fa-briefcase"></i> Nivel </th>
+                        <th><i class="fa fa-book"></i> Nombre </th>
+                        <th><i class="	fa fa-briefcase"></i> Area </th>
+                        <th><i class="fa fa-bar-chart"></i> Nivel </th>
                         <!-- <th><i class="fas fa-briefcase"></i> Estado </th> -->
-                        <th><i class="far fa-user-cog"></i> Opciones</th>
+                        <th><i class="fas fa-cogs"></i> Opciones</th>
                     </tr>
                 </thead>
                 <tbody>

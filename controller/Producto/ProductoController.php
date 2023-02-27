@@ -48,12 +48,6 @@ class ProductoController{
         return JSON_encode($datos);
     }
 
-    public function postVentaProducto(){
-        
-        $data = $this->gstProducto->postVentaProducto($_REQUEST);
-        $this->UpdateProducto();
-    }
-
     public function UpdateProducto(){
         $update = $this->gstProducto->updateProductoVenta($_REQUEST);
     }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-02-2023 a las 03:13:21
+-- Tiempo de generación: 27-02-2023 a las 22:30:13
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 7.4.30
 
@@ -151,10 +151,8 @@ INSERT INTO `producto` (`id_prod`, `prod_nombre`, `prod_referencia`, `prod_preci
 (78, 'Gaseosa Cocacola', '56234112', 5000, '3', 1, 8, 'img/imgCargarProductos/img_18181833.jpg', 'A', '2023-02-18 23:18:33'),
 (79, 'Suavizante Suavitel', '451125ADDA', 25000, '5', 8, 10, 'img/imgCargarProductos/img_18215929.png', 'A', '2023-02-19 02:59:29'),
 (77, 'Papas Margarita Pollo', '45128445', 2000, '250', 2, 20, 'img/imgCargarProductos/img_18170009.jpg', 'A', '2023-02-18 22:00:09'),
-(80, 'Cafe ', '45SDFG9855', 6000, '2', 5, 2, 'img/imgCargarProductos/producto-sin-imagen.png', 'I', '2023-02-19 03:10:31'),
 (81, 'Detergente Fab Liquido', '4551123546', 15000, '1.9', 8, 10, 'img/imgCargarProductos/img_22193654.png', 'A', '2023-02-23 00:36:54'),
-(82, 'Jabon Liquido Protex', '6554112554', 12000, '22', 8, 13, 'img/imgCargarProductos/img_22194008.png', 'A', '2023-02-23 00:40:08'),
-(83, 'Electronica', '784236AHSA', 12000, '1', 9, 0, 'img/imgCargarProductos/img_22201117.jpeg', 'I', '2023-02-23 01:11:17');
+(82, 'Jabon Liquido Protex', '6554112554', 12000, '22', 8, 13, 'img/imgCargarProductos/img_22194008.png', 'A', '2023-02-23 00:40:08');
 
 -- --------------------------------------------------------
 
@@ -208,7 +206,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `nombre`, `email`, `sexo`, `area_id`, `num_documento`, `num_telefono`, `direccion`, `ciudad`, `rol`, `ruta_img`, `semestre`) VALUES
-(15, 'Javier Andrés Rojas Erazo', 'jare_123@hotmail.es', 'F', 2, '123456789', '3173280247', 'Calle 46 # 10-51', 1, 1, 'img/imgCargarUsuarios/img_18215356.jpg', ''),
+(15, 'Javier Andrés Rojas Erazo', 'jare_123@hotmail.es', 'M', 2, '123456789', '3173280247', 'Calle 46 # 10-51', 1, 1, 'img/imgCargarUsuarios/img_18215356.jpg', ''),
 (16, 'Maria Alejandra Guevara', 'alejandra2255@gmail.con', 'F', 8, '123456789', '3205521463', 'Calle 46 # 10-51', 5, 2, 'img/imgCargarUsuarios/usuario_sin_foto.jpg', ''),
 (17, 'Maria Eliza Erazo Tovar', 'eliza180970@gmail.com', 'F', 9, '21232245', '3122135465', 'Calle 46 # 10-51', 1, 11, 'img/imgCargarUsuarios/usuario_sin_foto.jpg', '');
 
@@ -233,11 +231,10 @@ CREATE TABLE `ventas` (
 
 INSERT INTO `ventas` (`id_vent`, `id_prod`, `prod_ref`, `prod_prec`, `vnt_cant_prod`, `vnt_estado`) VALUES
 (46, 82, '6554112554', 12000, '6', 'A'),
-(45, 78, '56234112', 5000, '1', 'A'),
-(44, 78, '56234112', 5000, '1', 'A'),
-(43, 78, '56234112', 5000, '2', 'A'),
+(43, 78, '56234112', 5000, '1', 'A'),
 (42, 77, '45128445', 2000, '2', 'A'),
-(47, 83, '784236AHSA', 12000, '4', 'A');
+(47, 83, '784236AHSA', 12000, '4', 'A'),
+(48, 79, '451125ADDA', 25000, '10', 'A');
 
 --
 -- Índices para tablas volcadas
@@ -341,7 +338,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `id_vent` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id_vent` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- Restricciones para tablas volcadas
