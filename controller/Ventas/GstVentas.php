@@ -17,6 +17,23 @@ Class GstVentas{
         $prod_ref = $data['ref_prod'];
         $prod_prec = $data['prec_prod'];
         $cant_prod = $data['cant_prod'];
+
+        $resultado = $this->consultarProductoTienda($id_prod);
+        
+        if($resultado){
+            
+            $id_vent = $resultado[0]['id_vent'];
+            $cant_prod = $cant_prod + $resultado[0]['vnt_cant_prod'];
+            $resultado = $this->updateProductoTienda($prod_ref,$prod_prec,$cant_prod,$id_vent);
+            //echo "Editar Producto";
+        }else{
+            $resultado = $this->registrarNuevoProductoTienda($id_prod,$prod_ref,$prod_prec,$cant_prod);
+            //echo "Producto Nuevo";
+        }
+        return $resultado;
+    }
+
+    public function registrarNuevoProductoTienda($id_prod,$prod_ref,$prod_prec,$cant_prod){
         
         try {
             $sql ="insert into ventas values ('0',$id_prod,'$prod_ref',$prod_prec,$cant_prod,'A')";
@@ -27,6 +44,25 @@ Class GstVentas{
             var_dump($e);
         }
 
+    }
+
+    public function updateProductoTienda($prod_ref,$prod_prec,$cant_prod,$id_vent){
+        
+        try {
+            $sql =" UPDATE ventas SET prod_ref = '$prod_ref', prod_prec = '$prod_prec', vnt_cant_prod = '$cant_prod' WHERE id_vent = ".$id_vent;
+            $resultado = $this->modelVentas->editar($sql); 
+            return $resultado;
+        }catch(Exception $e){
+            echo "Error al insertar venta";
+            var_dump($e);
+        }
+    }
+
+    public function consultarProductoTienda($id){
+
+            $sql = "select id_vent, id_prod, prod_ref, vnt_cant_prod from ventas where id_prod = ".$id;
+            $datos = $this->modelVentas->consultarArray($sql);
+            return $datos;
     }
 
 
@@ -40,7 +76,7 @@ Class GstVentas{
     
     public function productoMasStock() {
 
-        $sql = " SELECT vnt.id_prod, pr.prod_nombre, sum(vnt.vnt_cant_prod) as vntTotal FROM producto pr INNER JOIN ventas vnt ON pr.id_prod = vnt.id_prod GROUP BY vnt.id_prod ORDER BY 3 desc limit 1 ";
+            $sql = " SELECT vnt.id_prod, pr.prod_nombre, sum(vnt.vnt_cant_prod) as vntTotal FROM producto pr INNER JOIN ventas vnt ON pr.id_prod = vnt.id_prod GROUP BY vnt.id_prod ORDER BY 3 desc limit 1 ";
             $datos = $this->modelVentas->consultarArray($sql);
             return $datos;
         

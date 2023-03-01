@@ -75,7 +75,7 @@ function postVentaProducto() {
 
             alertProcess('Notificación', "Se realizo la venta correctamente", 'success');
             url = 'index.php?modulo=Producto&controlador=Producto&funcion=listarProductos';
-            //setTimeout("redireccionarPagina('" + url + "')", 2000);
+            setTimeout("redireccionarPagina('" + url + "')", 2000);
 
 
         }, error: function (result) {
