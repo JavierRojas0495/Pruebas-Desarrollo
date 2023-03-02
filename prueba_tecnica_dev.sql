@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-02-2023 a las 22:30:13
+-- Tiempo de generación: 02-03-2023 a las 19:21:09
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 7.4.30
 
@@ -234,6 +234,7 @@ INSERT INTO `ventas` (`id_vent`, `id_prod`, `prod_ref`, `prod_prec`, `vnt_cant_p
 (43, 78, '56234112', 5000, '1', 'A'),
 (42, 77, '45128445', 2000, '2', 'A'),
 (47, 83, '784236AHSA', 12000, '4', 'A'),
+(49, 81, '4551123546', 15000, '3', 'A'),
 (48, 79, '451125ADDA', 25000, '10', 'A');
 
 --
@@ -338,7 +339,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `id_vent` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id_vent` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- Restricciones para tablas volcadas
