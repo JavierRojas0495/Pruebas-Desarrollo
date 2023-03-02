@@ -1,6 +1,6 @@
-<div class="fixed-top d-flex flex-row-reverse ">
+<div class="fixed-top d-flex flex-row-reverse " id="navbarFixed-top">
   <div class="collapse" id="navbarToggleExternalContent">
-    <div class="bg-dark p-4">
+    <div class="bg-dark p-1">
         <div class="row">
                 <div class="col-3">
                     <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
