@@ -1,4 +1,4 @@
-<div class="fixed-top d-flex flex-row-reverse">
+<div class="fixed-top d-flex flex-row-reverse ">
   <div class="collapse" id="navbarToggleExternalContent">
     <div class="bg-dark p-4">
         <div class="row">
