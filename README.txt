@@ -29,3 +29,21 @@ El desarrollo tiene JavaScript,PHP,Jquery,SweetAlert,DataTable,Validaciones para
  Tener en cuenta que para ingresar a la web deben ir a localhost/ nombre de la carpeta (Pruebas-Desarrollo)  /web
 y de ahi ir a alguno de los modulos que deseen realizar seguimiento
  
+ ================================================================================================================================
+
+El login en el momento se encuentra sin funcionamiento asi que se solo con presionar login lo dejara entrar al aplicativo
+
+================================================================================================================================
+
+Los modulos funcionales son 
+-> Usuarios (Registro, Validaciones, CRUD )
+-> Asignaturas (Registro, Validaciones, CRUD )
+-> Productos (Registro, Validaciones, CRUD, Ventas sirve para mandar los productos a la tienda virtual )
+================================================================================================================================
+
+Pendientes
+
+-> Login
+-> Menu lateral derecho
+-> Tienda virtual
+-> Cambio estado de productos tiendas
