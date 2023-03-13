@@ -1,3 +1,4 @@
+<?php include('modals/modalsTienda/agregarProductoModal.php'); ?>
 <br>
 <div class="text-center">
     <h2> <strong>Tienda Virtual</strong></h2>
@@ -18,14 +19,15 @@
                 <h4> <strong>Precio: </strong><?php echo number_format($value['prod_prec']); ?></h4>
                 <p class="card-text"><strong>Referencia:</strong> <?php echo $value['prod_ref']; ?></p>
                 <div class="form-group text-center">
-                    <a type='button' class='btn btn-success' onclick='postUsuario(2)'> <i class='fas fa-cart-plus'></i> Agregar </a>
-                    <a type='button' class='btn btn-info' onclick='postUsuario(2)'> <i class='fas fa-clipboard-list'></i> Ver Detalles </a>
+                    <button type='button' class='btn btn-success' onclick='modalShopCart()'> <i class='fas fa-cart-plus'></i> Agregar </button>
+                    <button type='button' class='btn btn-info' onclick=''> <i class='fas fa-clipboard-list'></i> Ver Detalles </button>
                 </div>
             </div>
             <div class="card-footer">
                 <small class="text-muted"> <strong> Unidades Disponibles <?php echo $value['vnt_cant_prod']; ?> </strong> </small>
             </div>
         </div>    
+        
 
     <?php } ?>        
 
@@ -33,5 +35,4 @@
 </div>
 
 <link href="css/carritoCompras.css" rel="stylesheet">
-
 

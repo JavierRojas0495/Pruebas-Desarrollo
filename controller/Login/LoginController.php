@@ -15,8 +15,9 @@ class LoginController{
 
         $resultado = $this->gstLogin->consultarCorreo($_GET['email']);
         //dd($resultado['ruta_img']);
-        echo JSON_encode($resultado['ruta_img']);
-        exit();
+        //echo JSON_encode($resultado['ruta_img']);
+        //echo json_encode(array("Oso"=> true, "Gato"=>null));
+        echo json_encode($resultado);
     }
 
 }

@@ -8,55 +8,51 @@ function alertProcess(accion, descripcion, type) {
 
 $("#exampleInputEmail").blur(function () {
 
+
+
     email = document.getElementById("exampleInputEmail").value;
+    let url = "index.php?modulo=Login&controlador=Login&funcion=consultarCorreo";
+    getConsultarCorreo(email, url);
     /*
-    getConsultarCorreo(email).then((respuesta) => {
-        console.log(respuesta);
-        postCrearProducto(nom_Prod, ref_Prod, prec_Prod, peso_Prod, cat_Prod, stock_Prod, pathImg);
+    let params = "&email=" + email;
+
+    $.getJSON(url, { "email": email })
+        .done(function (data, textStatus, jqXHR) {
+            if (console && console.log) {
+                console.log("La solicitud se ha completado correctamente.");
+            }
+        })
+        .fail(function (jqXHR, textStatus, errorThrown) {
+            if (console && console.log) {
+                console.log("Algo ha fallado: " + textStatus + " --> " + errorThrown);
+            }
     });
     */
 
-    $.ajax({
-        type: "GET",
-        url: "index.php?modulo=Login&controlador=Login&funcion=consultarCorreo",
-        data: "email=" + email,
-        dataType: "json",
-        success: function (data) {
-            console.log(data);
-            //let resultado = JSON.parse(respuesta);
-            //console.log(resultado);
-            //$imagenPrevisualizacion = document.querySelector("#imagenPrevisualizacion");
-            //$imagenPrevisualizacion.src = 'img/undraw_posting_photo.svg';
-            //alertProcess('Notificación',"Se edito correctamente",'success');
-        }, error: function (data) {
-            console.log("error============>  " + data);
-            alertProcess('Notificación', "Ocurrio un error al consultar este correo", 'error');
-            //setTimeout('document.location.reload()',2000);
-        }
-    });
 });
 
-/*
-function getConsultarCorreo(email) {
-    
+
+function getConsultarCorreo(email, url) {
+
     return new Promise((resolve, reject) => {
         //url: 'index.php?modulo=Login&controlador=Login&funcion=consultarCorreo',
         url: 'index.php?';
         $.ajax({
-            url: '../controller/Login/LoginController.php?function=consultarCorreo',
+            //url: '../controller/Login/LoginController.php?function=consultarCorreo',
+            url: url,
             type: 'GET',
             data: "email=" + email,
             success: function (response) {
                 console.log(response);
                 let respuesta = JSON.parse(response);
                 console.log(respuesta);
-                
+
                 if (respuesta === false) {
-                  alertProcess('Notificación',"Ocurrio un error al subir la imagen a servidor",'error');
-                  setTimeout('document.location.reload()', 2000);
-                  return false;
+                    alertProcess('Notificación', "Ocurrio un error", 'error');
+                    setTimeout('document.location.reload()', 2000);
+                    return false;
                 }
-                
+
                 resolve(respuesta);
             }
         }
@@ -65,4 +61,3 @@ function getConsultarCorreo(email) {
 
 
 }
-*/

@@ -85,4 +85,30 @@ function postVentaProducto() {
 
         }
     });
+
+
 }
+
+function modalShopCart() {
+
+    $('#modalAddCart').modal({ show: true });
+
+    add.onclick = () => {
+        let numero = Number(cantProd.value.trim(" "));
+        numero = !isNaN(numero) ? numero + 1 : 1;
+
+        cantProd.value = numero;
+    }
+
+    del.onclick = () => {
+        let numero = Number(cantProd.value.trim(" "));
+        numero = !isNaN(numero) ? numero - 1 : 1;
+
+        if (numero < 1) {
+            numero = 1;
+        }
+        cantProd.value = numero;
+    }
+}
+
+

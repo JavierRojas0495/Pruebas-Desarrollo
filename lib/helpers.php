@@ -20,6 +20,7 @@ session_start();
         }
         return $url;
     }
+    
     function resolve(){
         $modulo=ucwords($_GET['modulo']);
         $controlador=ucwords($_GET['controlador']);// DepartamentoController.php

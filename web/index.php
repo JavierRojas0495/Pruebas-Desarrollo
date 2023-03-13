@@ -1,7 +1,7 @@
 <?php
-include_once '../lib/helpers.php';
-include_once '../view/Partials/head.php';
-include_once '../view/Partials/navbar.php';
+    include_once '../lib/helpers.php';
+    include_once '../view/Partials/head.php';
+    include_once '../view/Partials/navbar.php';
 ?>
 <body>
     <div id="wrapper">
