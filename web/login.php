@@ -54,7 +54,7 @@
                                                 id="exampleInputPassword" placeholder="Contraseña">
                                         </div>
 
-                                        <a class="btn btn-primary btn-user btn-block" href="index.php">
+                                        <a class="btn btn-primary btn-user btn-block login-index">
                                             <b>Iniciar Session </b>
                                         </a>
                                         

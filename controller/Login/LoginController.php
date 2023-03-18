@@ -1,4 +1,7 @@
 <?php
+//include_once '../../model/Login/LoginModel.php';
+//include_once 'GstLogin.php';
+
 include_once '../model/Login/LoginModel.php';
 include_once 'GstLogin.php';
 
@@ -12,11 +15,13 @@ class LoginController{
 
     
     public function consultarCorreo(){
+        $resultado = $this->gstLogin->consultarCorreo($_POST['email']);
+        echo json_encode($resultado);
+    }
 
-        $resultado = $this->gstLogin->consultarCorreo($_GET['email']);
-        //dd($resultado['ruta_img']);
-        //echo JSON_encode($resultado['ruta_img']);
-        //echo json_encode(array("Oso"=> true, "Gato"=>null));
+    public function login(){
+
+        $resultado = $this->gstLogin->login($_POST);
         echo json_encode($resultado);
     }
 

@@ -5,59 +5,121 @@ function alertProcess(accion, descripcion, type) {
         type
     )
 }
+function successLogin(nombre) {
+    let timerInterval
+    Swal.fire({
+        title: 'Bienvenido ! <br> <strong>' + nombre + '!</strong>',
+        html: 'Iniciando sesión espere.',
+        timer: 1500,
+        timerProgressBar: true,
+        didOpen: () => {
+            Swal.showLoading()
+            const b = Swal.getHtmlContainer().querySelector('b')
+        },
+        willClose: () => {
+            clearInterval(timerInterval)
+        }
+    })
+}
+
+function validaVacio(valor) {
+    valor = valor.replace("&nbsp;", "");
+    valor = valor == undefined ? "" : valor;
+    if (!valor || 0 === valor.trim().length) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+function redireccionarPagina(url) {
+    window.location = url;
+}
 
 $("#exampleInputEmail").blur(function () {
 
-
-
     email = document.getElementById("exampleInputEmail").value;
-    let url = "index.php?modulo=Login&controlador=Login&funcion=consultarCorreo";
-    getConsultarCorreo(email, url);
-    /*
-    let params = "&email=" + email;
+    let url = "ajax.php?modulo=Login&controlador=Login&funcion=consultarCorreo";
 
-    $.getJSON(url, { "email": email })
-        .done(function (data, textStatus, jqXHR) {
-            if (console && console.log) {
-                console.log("La solicitud se ha completado correctamente.");
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: "email=" + email,
+        success: function (result) {
+
+            if (result.length <= 2) {
+                $('#imageUsu').attr('src', "img/imgCargarUsuarios/usuario_sin_foto.jpg");
+                alertProcess('Notificación', "Correo no registrado", 'error');
+            } else {
+                respuesta = JSON.parse(result);
+                $('#imageUsu').attr('src', respuesta[0]['ruta_img']);
             }
-        })
-        .fail(function (jqXHR, textStatus, errorThrown) {
-            if (console && console.log) {
-                console.log("Algo ha fallado: " + textStatus + " --> " + errorThrown);
-            }
+
+        }, error: function (result) {
+            alertProcess('Notificación', "Ocurrio un error", 'error');
+            setTimeout('document.location.reload()', 2000);
+        }
     });
-    */
 
 });
 
+$('.login-index').on('click', function (e) {
 
-function getConsultarCorreo(email, url) {
+    email = document.getElementById("exampleInputEmail").value;
+    pass = document.getElementById("exampleInputPassword").value;
 
-    return new Promise((resolve, reject) => {
-        //url: 'index.php?modulo=Login&controlador=Login&funcion=consultarCorreo',
-        url: 'index.php?';
-        $.ajax({
-            //url: '../controller/Login/LoginController.php?function=consultarCorreo',
-            url: url,
-            type: 'GET',
-            data: "email=" + email,
-            success: function (response) {
-                console.log(response);
-                let respuesta = JSON.parse(response);
-                console.log(respuesta);
+    if (validaVacio(email)) {
 
-                if (respuesta === false) {
-                    alertProcess('Notificación', "Ocurrio un error", 'error');
-                    setTimeout('document.location.reload()', 2000);
-                    return false;
-                }
+        document.getElementById('exampleInputEmail').focus();
+        alertProcess('Notificación', "El correo electronico no puede estar vacio", 'error');
+        return false;
+    }
 
-                resolve(respuesta);
+    if (validaVacio(pass)) {
+
+        document.getElementById('exampleInputPassword').focus();
+        alertProcess('Notificación', "La contraseña no puede estar vacia", 'error');
+        return false;
+    }
+
+
+    let url = "ajax.php?modulo=Login&controlador=Login&funcion=login";
+
+    let data = {
+        "correo": email,
+        "password": pass
+    };
+
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: data,
+        success: function (result) {
+            //console.log(result);
+            if (result.length <= 2) {
+                alertProcess('Notificación', "Contraseña incorrecta", 'error');
+            } else {
+                let respuesta = JSON.parse(result);
+
+                //console.log(respuesta);
+                sessionStorage.setItem("nombre", respuesta[0]['nombre']);
+                sessionStorage.setItem("rol", respuesta[0]['rol']);
+                sessionStorage.setItem("usuario", respuesta[0]['id']);
+                //console.log(sessionStorage);
+
+                successLogin(respuesta[0]['nombre']);
+                url = 'index.php';
+                setTimeout("redireccionarPagina('" + url + "')", 1500);
             }
+
+
+        }, error: function (result) {
+            alertProcess('Notificación', "Ocurrio un error", 'error');
+            setTimeout('document.location.reload()', 1500);
         }
-        )
     });
 
 
-}
+});
+
