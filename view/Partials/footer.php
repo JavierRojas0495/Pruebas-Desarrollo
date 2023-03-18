@@ -30,11 +30,13 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <!-- funciones Js Propias -->
+    <script src="../web/js/globalJs/global.js"> </script>
+    <script src="../web/js/Login/login.js"> </script>
     <script src="../web/js/usuariosJs/usuarios.js"></script>
     <script src="../web/js/productoJs/producto.js"> </script>
     <script src="../web/js/asignaturaJs/asignatura.js"> </script>
     <script src="../web/js/ventasJs/ventas.js"> </script>
-
+    
     <!-- DataTables -->
     <script type="text/javascript" src="js/DataTables/datatables.min.js"></script>
     <!-- Fin DataTables -->

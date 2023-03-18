@@ -1,4 +1,7 @@
 <?php
+session_start();
+       if(isset($_SESSION['Usuario'])) {
+
     include_once '../lib/helpers.php';
     include_once '../view/Partials/head.php';
     include_once '../view/Partials/navbar.php';
@@ -40,4 +43,9 @@
     <!-- /#wrapper -->
 <?php
         include_once '../view/Partials/footer.php';
+?>
+<?php 
+       }else{
+            header('Location: login.php');
+       }
 ?>

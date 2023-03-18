@@ -25,4 +25,8 @@ class LoginController{
         echo json_encode($resultado);
     }
 
+    public function logout(){
+        $this->gstLogin->logout($_GET);
+    }
+
 }

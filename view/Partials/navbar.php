@@ -8,6 +8,7 @@
                         <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill"  role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>
                         <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
                         <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
+                        <a class="nav-link logout-index" id="logout" data-toggle="pill" role="tab" aria-controls="logout" aria-selected="false">Cerrar Session</a>
                     </div>
                 </div>
         </div>

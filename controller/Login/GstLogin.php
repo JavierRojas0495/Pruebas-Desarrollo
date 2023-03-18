@@ -42,4 +42,10 @@ Class GstLogin{
         return $datos;
     }
 
+
+    public function logout(){
+
+        unset($_SESSION);
+        session_destroy();
+    }
 }

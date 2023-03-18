@@ -5,11 +5,29 @@ function alertProcess(accion, descripcion, type) {
         type
     )
 }
+
 function successLogin(nombre) {
     let timerInterval
     Swal.fire({
         title: 'Bienvenido ! <br> <strong>' + nombre + '!</strong>',
         html: 'Iniciando sesión espere.',
+        timer: 1500,
+        timerProgressBar: true,
+        didOpen: () => {
+            Swal.showLoading()
+            const b = Swal.getHtmlContainer().querySelector('b')
+        },
+        willClose: () => {
+            clearInterval(timerInterval)
+        }
+    })
+}
+
+function successLogout(nombre) {
+    let timerInterval
+    Swal.fire({
+        title: 'Hasta Luego ! <br> <strong>' + nombre + '!</strong>',
+        html: 'Cerrando sesión espere.',
         timer: 1500,
         timerProgressBar: true,
         didOpen: () => {
@@ -123,3 +141,26 @@ $('.login-index').on('click', function (e) {
 
 });
 
+$('.logout-index').on('click', function (e) {
+
+    let usuario = sessionStorage.getItem('usuario');
+    let nombre = sessionStorage.getItem('nombre');
+    let url = "ajax.php?modulo=Login&controlador=Login&funcion=logout";
+
+    $.ajax({
+        type: "GET",
+        url: url,
+        data: "id=" + usuario,
+        success: function (result) {
+            successLogout(nombre);
+            sessionStorage.clear();
+            url = 'index.php';
+            setTimeout("redireccionarPagina('" + url + "')", 1500);
+
+        }, error: function (result) {
+
+            alertProcess('Notificación', "Ocurrio un error", 'error');
+            setTimeout('document.location.reload()', 2000);
+        }
+    });
+})
