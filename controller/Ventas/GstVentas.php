@@ -85,10 +85,16 @@ Class GstVentas{
     public function productoMasVendido(){
 
         $sql = " SELECT vnt.id_prod, pr.prod_nombre, sum(vnt.vnt_cant_prod) as vntTotal FROM producto pr INNER JOIN ventas vnt ON pr.id_prod = vnt.id_prod GROUP BY vnt.id_prod ORDER BY 3 asc limit 1 ";
-            $datos = $this->modelVentas->consultarArray($sql);
-            return $datos;
+        $datos = $this->modelVentas->consultarArray($sql);
+        return $datos;
     }
 
+    public function getProductId($id){
+        $sql = " SELECT P.id_prod, P.ruta_img, P.prod_nombre, P.prod_referencia, P.prod_precio, V.vnt_cant_prod FROM producto P INNER JOIN ventas V ON P.id_prod = V.id_prod WHERE P.id_prod = $id AND vnt_estado = 'A' ";
+        $datos = $this->modelVentas->consultarArray($sql);
+        return $datos;
+
+    }
         
     
 

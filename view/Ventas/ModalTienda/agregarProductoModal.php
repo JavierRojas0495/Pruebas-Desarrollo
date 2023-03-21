@@ -11,39 +11,37 @@
       <div class="modal-body">
       
         <div class="card-body">
-          <h3 class="card-title text-center"> <strong>  PRODUCTO </strong></h3>
-          <h4> <strong>Precio: </strong></h4>
-          <p class="card-text"><strong>Referencia:</strong> </p>
+          <h3 class="card-title text-center" id="product-name"></h3>
           <div class="form-group">
             <div class="row d-block ">
-                      
+              <img id="imagenPrevisualizacion" class="rounded mx-auto d-block" style=" width: 250px; height: 250px "></img>
+                  <p class="card-text" style="margin-left: 13px;" id="product-ref"></p>    
                   <div class="col-6"> 
-                      <label>Precio:</label>
-                      <input type="text" class="form-input" style="width: 108px; margin-left: 41px;" readonly="readonly" >
+                      <label><strong> Precio:</strong></label>
+                      <h5 id="prec-prod"></h5>
                   </div>
+                  <div class="card-text">  
+                    <label style="margin-left: 13px;"> <strong>Unidades Disponibles: </strong> <h5 id="UnidadesD"> </h5> </label>
+                  </div>
+
                   <div class="row"> 
                         <div>
-                          <label style="margin-left: 25px;">Unidades:</label>
+                          <label style="margin-left: 25px;"><strong> Unidades: </strong></label>
                         </div>
-                          
                         <div class="form" style="margin-left: 19px;">
                           <a type="button" id="del" class="btn btn-danger">-</a>
-                            <input type="text" id="cantProd" class="text-center" style="width: 60px;">
+                            <input type="text" id="cantProd" class="text-center" style="width: 60px;"readonly>
                           <a type="button" id="add" class="btn btn-success">+</a>
                         </div>
                   </div>
-                  <div>
-                          <label style="margin-left: 13px;">Stock:</label>
-                        </div>
-                  </div>
-                  
+                  </div>                  
             </div>
           </div>
 
       </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Agregar Unidades</button>
+        <button type="button" class="btn btn-primary">Agregar Producto</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
       </div>
     </div>

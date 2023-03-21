@@ -16,6 +16,16 @@ function ventaProducto(id) {
     })
 }
 
+function NumberFormat(number) {
+
+    const formatterPeso = new Intl.NumberFormat('es-CO', {
+        style: 'currency',
+        currency: 'COP',
+        minimumFractionDigits: 0
+    })
+    return formatterPeso.format(number);
+}
+
 $("#cant_producto").on("change", function () {
 
     let cant_prod = $("#cant_producto").val()
@@ -89,15 +99,46 @@ function postVentaProducto() {
 
 }
 
-function modalShopCart() {
+function modalShop(id_product) {
 
+    $('#cantProd').val(1);
+
+    $.ajax({
+        type: "GET",
+        url: "ajax.php?modulo=Ventas&controlador=Ventas&funcion=getProductId",
+        data: "id_product=" + id_product,
+        success: function (result) {
+            resultados = JSON.parse(result);
+            //console.log(resultados);
+            document.getElementById('product-name').innerHTML = '<strong>' + resultados[0]['prod_nombre'] + '</strong>';
+            $imagenPrevisualizacion.src = resultados[0]['ruta_img'];
+            document.getElementById('product-ref').innerHTML = '<strong> Referencia: </strong >' + resultados[0]['prod_referencia'];
+            document.getElementById('UnidadesD').innerHTML = '</strong >' + resultados[0]['vnt_cant_prod'];
+            document.getElementById('prec-prod').innerHTML = NumberFormat(resultados[0]['prod_precio']);
+
+        }, error: function (result) {
+            alertProcess('Notificación', "Ocurrio un error", 'error');
+            console.log(result);
+            setTimeout('document.location.reload()', 2000);
+        }
+    });
     $('#modalAddCart').modal({ show: true });
 
     add.onclick = () => {
         let numero = Number(cantProd.value.trim(" "));
         numero = !isNaN(numero) ? numero + 1 : 1;
 
+        if (numero > resultados[0]['vnt_cant_prod']) {
+            alertProcess('Notificación', "Unidades Disponibles: " + resultados[0]['vnt_cant_prod'], 'error');
+            numero = resultados[0]['vnt_cant_prod'];
+        }
+
+
+
         cantProd.value = numero;
+        ValorTotal = resultados[0]['prod_precio'] * numero;
+
+        document.getElementById('prec-prod').innerHTML = NumberFormat(ValorTotal);
     }
 
     del.onclick = () => {
@@ -108,7 +149,13 @@ function modalShopCart() {
             numero = 1;
         }
         cantProd.value = numero;
+
+        ValorTotal = resultados[0]['prod_precio'] * numero;
+
+        document.getElementById('prec-prod').innerHTML = NumberFormat(ValorTotal);
     }
+
+
 }
 
 
