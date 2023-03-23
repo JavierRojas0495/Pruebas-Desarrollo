@@ -58,6 +58,13 @@ function redireccionarPagina(url) {
 $("#exampleInputEmail").blur(function () {
 
     email = document.getElementById("exampleInputEmail").value;
+
+    if (email.trim().length == 0) {
+        document.getElementById('exampleInputEmail').focus();
+        alertProcess('Notificación', "Ingresar El Correo Electronico", 'error');
+        return false;
+    }
+
     let url = "ajax.php?modulo=Login&controlador=Login&funcion=consultarCorreo";
 
     $.ajax({
@@ -116,7 +123,7 @@ $('.login-index').on('click', function (e) {
         success: function (result) {
             //console.log(result);
             if (result.length <= 2) {
-                alertProcess('Notificación', "Contraseña incorrecta", 'error');
+                alertProcess('Error', "Correo o Contraseña Incorrectos", 'error');
             } else {
                 let respuesta = JSON.parse(result);
 

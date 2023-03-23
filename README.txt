@@ -29,9 +29,6 @@ El desarrollo tiene JavaScript,PHP,Jquery,SweetAlert,DataTable,Validaciones para
  Tener en cuenta que para ingresar a la web deben ir a localhost/ nombre de la carpeta (Pruebas-Desarrollo)  /web
 y de ahi ir a alguno de los modulos que deseen realizar seguimiento
  
- ================================================================================================================================
-
-El login en el momento se encuentra sin funcionamiento asi que se solo con presionar login lo dejara entrar al aplicativo
 
 ================================================================================================================================
 
@@ -43,7 +40,15 @@ Los modulos funcionales son
 
 Pendientes
 
--> Login
 -> Menu lateral derecho
 -> Tienda virtual
 -> Cambio estado de productos tiendas
+
+========================================================================================================================================
+
+Correo para poder iniciar la session
+
+Correo: usuarioprueba@gmail.com	
+password: 12345
+
+es las credenciales para lograr iniciar el aplicativo

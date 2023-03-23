@@ -22,7 +22,7 @@
 
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-gradient-primary login-background">
 
     <div class="container">
 
@@ -31,12 +31,12 @@
 
             <div class="col-xl-10 col-lg-12 col-md-9">
 
-                <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card o-hidden border-0 shadow-lg my-5 card-login">
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
                             <div class="col-lg-6 d-none d-lg-block"> 
-                                <img class="img-thumbnail m-3" style="width: 450px; height: auto;" alt="Responsive image" src="img/imgCargarUsuarios/usuario_sin_foto.jpg" id="imageUsu" >
+                                <img class="img-thumbnail m-3 card-img" style="width: 450px; height: auto;" alt="Responsive image" src="img/imgCargarUsuarios/usuario_sin_foto.jpg" id="imageUsu" >
                             </div>
                             <div class="col-lg-6">
                                 <div class="p-5">
@@ -55,17 +55,18 @@
                                         </div>
 
                                         <a class="btn btn-primary btn-user btn-block login-index">
-                                            <b>Iniciar Session </b>
+                                            <strong> Ingresar </strong>
                                         </a>
                                         
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Forgot Password?</a>
+                                        <!-- <a class="small" href="forgot-password.html">Forgot Password?</a> -->
                                     </div>
                                     <!-- <div class="text-center">
                                         <a class="small" href="register.html">Create an Account!</a>
                                     </div> -->
+                                    
                                 </div>
                             </div>
                         </div>
@@ -94,6 +95,7 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     
     <script src="js/Login/login.js"></script>
+    <link href="css/estilosLogin.css" rel="stylesheet">
 </body>
 
 </html>
