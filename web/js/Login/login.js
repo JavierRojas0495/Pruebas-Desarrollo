@@ -13,6 +13,9 @@ function successLogin(nombre) {
         html: 'Iniciando sesión espere.',
         timer: 1500,
         timerProgressBar: true,
+        showConfirmButton: false,
+        allowOutsideClick: false,
+        allowEscapeKey: false,
         didOpen: () => {
             Swal.showLoading()
             const b = Swal.getHtmlContainer().querySelector('b')
@@ -30,6 +33,9 @@ function successLogout(nombre) {
         html: 'Cerrando sesión espere.',
         timer: 1500,
         timerProgressBar: true,
+        showConfirmButton: false,
+        allowOutsideClick: false,
+        allowEscapeKey: false,
         didOpen: () => {
             Swal.showLoading()
             const b = Swal.getHtmlContainer().querySelector('b')

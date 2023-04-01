@@ -11,6 +11,9 @@
       <div class="modal-body">
       
         <div class="card-body">
+          <div class="card-product">
+            <input type="hidden" class="form-control" id="productId">
+          </div>
           <h3 class="card-title text-center" id="product-name"></h3>
           <div class="form-group">
             <div class="row d-block ">
@@ -30,7 +33,7 @@
                         </div>
                         <div class="form" style="margin-left: 19px;">
                           <a type="button" id="del" class="btn btn-danger">-</a>
-                            <input type="text" id="cantProd" class="text-center" style="width: 60px;"readonly>
+                            <input type="text" id="cantProd" class="text-center add-cant" style="width: 60px;"readonly>
                           <a type="button" id="add" class="btn btn-success">+</a>
                         </div>
                   </div>
@@ -41,7 +44,7 @@
       </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Agregar Producto</button>
+        <button type="button" class="btn btn-primary add-product">Agregar Producto</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
       </div>
     </div>

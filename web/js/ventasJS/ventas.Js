@@ -110,6 +110,7 @@ function modalShop(id_product) {
         success: function (result) {
             resultados = JSON.parse(result);
             //console.log(resultados);
+            document.getElementById('productId').value = id_product;
             document.getElementById('product-name').innerHTML = '<strong>' + resultados[0]['prod_nombre'] + '</strong>';
             $imagenPrevisualizacion.src = resultados[0]['ruta_img'];
             document.getElementById('product-ref').innerHTML = '<strong> Referencia: </strong >' + resultados[0]['prod_referencia'];
@@ -154,8 +155,30 @@ function modalShop(id_product) {
 
         document.getElementById('prec-prod').innerHTML = NumberFormat(ValorTotal);
     }
-
-
 }
+
+
+$(".add-product").on("click", function () {
+
+
+    let cantProduct = cantProd.value;
+    let Id = productId.value
+
+    if (localStorage.length == 0) {
+        localStorage.setItem(1, { "idProduct": Id, "cantProduct": cantProduct });
+    } else {
+
+        for (let x = 0; x < localStorage.length; x++) {
+            data = localStorage.getItem(localStorage.key(x));
+            console.log(data);
+        }
+
+        //i = localStorage.length
+        //localStorage.setItem(i + 1, { "idProduct": Id, "cantProduct": cantProduct });
+    }
+
+
+
+});
 
 

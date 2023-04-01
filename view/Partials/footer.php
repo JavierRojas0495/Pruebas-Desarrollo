@@ -64,8 +64,11 @@
 
   <!-- Copyright -->
   <div class="text-center footer-foo p-3">
-    © 2023 Copyright:
-    <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+    Proyecto Personal.
+    <br>
+     Javier Andres Rojas Erazo.
+     <br>
+     © 2023
   </div>
   <!-- Copyright -->
 </footer>
