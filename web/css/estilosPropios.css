@@ -1,3 +1,4 @@
+
 .form-area {
     margin-left: 10px;
 }
@@ -5,6 +6,21 @@
 .campos {
     background-color: aqua;
 }
+/*
+.bg-gradient-primary {
+    background-image: linear-gradient(180deg, #102EEF 10%, #EAEBF5 100%) !important;
+    background-size: cover !important;
+}
+
+.footer-foo {
+    background-image: linear-gradient(180deg, #102EEF 10%, #FEFEFE 100%) !important;
+}
+
+body {
+
+    font-family: Calibri Light !important;
+}
+*/
 
 .bg-gradient-primary {
     background-image: linear-gradient(180deg, #2778c4 10%, #3a3b45 100%) !important;

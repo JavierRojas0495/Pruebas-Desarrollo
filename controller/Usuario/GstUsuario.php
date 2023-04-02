@@ -17,7 +17,7 @@ Class GstUsuario{
             $sql=" SELECT id, nombre, email, sexo, area_id, num_documento, num_telefono, direccion, ciudad, rol, semestre FROM usuario WHERE id =".$id;
             $datos = $this->modelUsuario->consultarArray($sql);
         }catch(Exception $e){
-            echo "Error al consultar empleado";
+            echo "Error al consultar Usuario";
             
         }
         
@@ -122,6 +122,18 @@ Class GstUsuario{
         
         $sql = "select id,nombre from ciudades";
         $datos = $this->modelUsuario->consultarArray($sql);
+        return $datos;
+    }
+
+    public function ConsultarUsuariosAsesores(){
+        
+        try{   
+            $sql=" SELECT id, nombre FROM usuario WHERE rol = 12 ";
+            $datos = $this->modelUsuario->consultarArray($sql);
+        }catch(Exception $e){
+            echo "Error al consultar Usuario";
+        }
+        
         return $datos;
     }
 

@@ -1,3 +1,44 @@
+$(document).ready(function () {
+    $('#dataTableComisiones').DataTable({
+        language: {
+            "decimal": "",
+            "emptyTable": "Sin Información",
+            "info": "Registros _START_ de _TOTAL_ Registros",
+            "infoEmpty": "Registros 0 to 0 of 0 Registros",
+            "infoFiltered": "(Filtrado de _MAX_ total registros)",
+            "infoPostFix": "",
+            "thousands": ",",
+            "lengthMenu": "Cantidad _MENU_",
+            "loadingRecords": "Cargando...",
+            "processing": "Procesando...",
+            "search": "Buscar:",
+            "zeroRecords": "Sin resultados",
+            "paginate": {
+                "first": "Primero",
+                "last": "Ultimo",
+                "next": "Siguiente",
+                "previous": "Anterior"
+            }
+        },
+    });
+});
+
+function validaVacio(valor) {
+
+    valor = valor.replace("&nbsp;", "");
+    valor = valor == undefined ? "" : valor;
+    if (!valor || 0 === valor.trim().length) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+function isNumeric(val) {
+    return isNaN(val);
+}
+
 function ventaProducto(id) {
 
     Swal.fire({
@@ -181,4 +222,139 @@ $(".add-product").on("click", function () {
 
 });
 
+function generarVentaProducto(id) {
 
+    Swal.fire({
+        title: ' Seguro quieres vender este producto ?',
+        text: "No podras revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, vender esto!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var url = "index.php?modulo=Ventas&controlador=Ventas&funcion=vistaVentasProducto&idProd=" + id;
+            setTimeout("redireccionarPagina('" + url + "')", 500);
+        }
+    })
+}
+
+function postVentaProductoAsesor() {
+
+    let cant_prod = document.getElementById('cant_producto').value;
+    let id_prod = document.getElementById('idproducto').value;
+    let stock_Prod = document.getElementById('stock_producto').value;
+    let ref_Prod = document.getElementById('ref_producto').value;
+    let prec_venta = document.getElementById('prec_venta').value;
+    let precio_prod = document.getElementById('prec_producto').value;
+    let asesor_id = document.getElementById('usuario_id').value;
+
+    if (parseInt(stock_Prod) - parseInt(cant_prod) < 0) {
+        alertProcess('Notificación', "Sin unidades suficientes para esta compra.", "error");
+        return;
+    }
+    if (parseInt(cant_prod) <= 0) {
+        alertProcess('Notificación', "Sin unidades para esta compra.", "error");
+        return;
+    }
+
+    if (validaVacio(asesor_id)) {
+        document.getElementById('usuario_id').focus();
+        alertProcess('Notificación', "El campo Asesor no puede estar vacio", 'error');
+        return false;
+    }
+    if (isNumeric(asesor_id)) {
+        document.getElementById('usuario_id').focus();
+        alertProcess('Notificación', "El campo Asesor no debe modificarse", 'error');
+        setTimeout('document.location.reload()', 2000);
+        return false;
+    }
+
+    data = {
+        "cant_prod": cant_prod,
+        "id_prod": id_prod,
+        "ref_prod": ref_Prod,
+        "prec_venta": prec_venta,
+        "prec_prod": precio_prod,
+        "asesor_id": asesor_id
+    };
+
+
+    $.ajax({
+        type: "POST",
+        url: "ajax.php?modulo=Ventas&controlador=Ventas&funcion=postVentaProductoAsesor",
+        data: data,
+        success: function (result) {
+            if (result == "true") {
+                alertProcess('Notificación', "Se realizo el registro correctamente", 'success');
+                url = 'index.php?modulo=Ventas&controlador=Ventas&funcion=registrarVentas';
+                setTimeout("redireccionarPagina('" + url + "')", 2000);
+            } else {
+                alertProcess('Notificación', "No se pudo registrar la venta", 'error');
+                setTimeout('document.location.reload()', 3000);
+            }
+        }, error: function (result) {
+
+            alertProcess('Notificación', "No se pudo registrar la venta", 'error');
+            setTimeout('document.location.reload()', 2000);
+
+        }
+    });
+
+
+}
+
+function geneararComisiones() {
+
+    let id_usuario = document.getElementById('id_usu').value;
+    let comision = document.getElementById('comision').value;
+    let tipo = document.getElementById('tipo').value;
+
+    if (validaVacio(id_usuario)) {
+        document.getElementById('id_usu').focus();
+        alertProcess('Notificación', "El campo Asesor no puede estar vacio", 'error');
+        return false;
+    }
+
+    if (isNumeric(id_usuario)) {
+        document.getElementById('id_usu').focus();
+        alertProcess('Notificación', "El campo Asesor no puede modificarse", 'error');
+        return false;
+    }
+
+    if (validaVacio(comision)) {
+        document.getElementById('comision').focus();
+        alertProcess('Notificación', "El campo Comision no puede estar vacio", 'error');
+        return false;
+    }
+
+    if (isNumeric(comision)) {
+        document.getElementById('comision').focus();
+        alertProcess('Notificación', "El campo Comision no puede modificarse", 'error');
+        return false;
+    }
+
+    if (validaVacio(tipo)) {
+        document.getElementById('tipo').focus();
+        alertProcess('Notificación', "El campo Tipo no puede estar vacio", 'error');
+        return false;
+    }
+
+    if (isNumeric(tipo)) {
+        document.getElementById('tipo').focus();
+        alertProcess('Notificación', "El campo Tipo no puede modificarse", 'error');
+        return false;
+    }
+
+    data = {
+        "id_usu": id_usuario,
+        "comision": comision,
+        "tipo": tipo
+    };
+
+    url = 'index.php?modulo=Ventas&controlador=Ventas&funcion=postGenearVistaComisiones&id_usu=' + id_usuario + '&comision=' + comision + '&tipo=' + tipo;
+    setTimeout("redireccionarPagina('" + url + "')", 0);
+
+
+}

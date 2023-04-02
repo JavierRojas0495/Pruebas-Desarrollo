@@ -74,18 +74,33 @@
             <!-- </li>
 
             <li class="nav-item"> -->
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVenta"
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVentaProductos"
                     aria-expanded="true" aria-controls="collapseVenta">
                     <i class="fas fa-cash-register"></i>
                     <span>Ventas Productos</span>
                 </a>
-                <div id="collapseVenta" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
+                <div id="collapseVentaProductos" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Modulo De Ventas:</h6>
+                        <h6 class="collapse-header">Modulo De Ventas Prod: </h6>
                         <a class="collapse-item" href="<?php echo getUrl("Ventas", "Ventas", "tiendaVirtual"); ?>">Entrar A La Tienda</a>
                         <a class="collapse-item" href="<?php echo getUrl("Ventas", "Ventas", "listarVentasProductos"); ?>">Lista De Ventas</a>
                     </div>
                 </div>
+
+
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVentaUsers"
+                    aria-expanded="true" aria-controls="collapseVenta">
+                    <i class="fas fa-address-card"></i>
+                    <span>Ventas Asesores</span>
+                </a>
+                <div id="collapseVentaUsers" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Modulo De Ventas:</h6>
+                        <a class="collapse-item" href="<?php echo getUrl("Ventas", "Ventas", "registrarVentas"); ?>">Registrar Ventas</a>
+                        <a class="collapse-item" href="<?php echo getUrl("Ventas", "Ventas", "vistaCalcularComisiones"); ?>">Calcular Comisiones</a>
+                    </div>
+                </div>
+
             </li>
 
             <!-- Divider -->

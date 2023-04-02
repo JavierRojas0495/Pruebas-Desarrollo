@@ -95,7 +95,68 @@ Class GstVentas{
         return $datos;
 
     }
+    
+    public function postVentaProductoAsesor($data){
+
+        $id_prod = $data['id_prod'];
+        $prod_ref = $data['ref_prod'];
+        $prod_prec = $data['prec_prod'];
+        $cant_prod = $data['cant_prod'];
+        $total_venta = $data['prec_venta'];
+        $asesor = $data['asesor_id'];
         
+        try {
+            $sql ="insert into ventas_asesor values ('0',$id_prod,'$prod_ref',$prod_prec,$cant_prod,$total_venta,$asesor)";
+            $resultado = $this->modelVentas->insertar($sql); 
+        }catch(Exception $e){
+            echo "Error al insertar venta";
+            var_dump($e);
+        }
+
+        return $resultado;
+    }
+
+    public function postGenerarComisiones($data){
+
+        
+        $id_usuario = $data['id_usu'];
+        $comision = $data['comision'];
+        $tipo = $data['tipo'];
+
+        $comision = $comision / 100;
+
+
+        if($id_usuario == 0) {
+            // TODOS
+            if( $tipo == 0 ){
+                // Venta por venta
+                $sql = " SELECT VA.usuario_id, P.ruta_img, P.prod_nombre, P.prod_referencia, VA.prod_prec, VA.cant_prod, VA.total_venta, ( VA.total_venta* $comision ) as comision, U.nombre FROM ventas_asesor VA INNER JOIN producto P ON P.id_prod = VA.id_prod INNER JOIN usuario U ON U.id = VA.usuario_id ORDER BY 1 ";
+            }else {
+                // Todas la ventas juntas
+                $sql = " SELECT VA.usuario_id, SUM(VA.total_venta) as totalventa, SUM(VA.total_venta*$comision) as comision, U.nombre FROM ventas_asesor VA INNER JOIN usuario U ON U.id = VA.usuario_id GROUP BY 1 ORDER BY 1 ";
+            }
+            
+        }else {
+            // Segun Id Usuario
+            if($tipo == 0){
+                // Venta por venta
+                $sql = " SELECT P.ruta_img, P.prod_nombre, P.prod_referencia, VA.prod_prec, VA.cant_prod, VA.total_venta, (VA.total_venta*$comision) as comision, U.nombre FROM ventas_asesor VA INNER JOIN producto P ON P.id_prod = VA.id_prod INNER JOIN usuario U ON U.id = VA.usuario_id WHERE VA.usuario_id = $id_usuario ";
+            }else {
+                $sql = " SELECT VA.usuario_id, SUM(VA.total_venta) as totalventa, SUM(VA.total_venta*0.05) comision, U.nombre FROM ventas_asesor VA INNER JOIN usuario U ON U.id = VA.usuario_id WHERE VA.usuario_id = $id_usuario ORDER BY 1 ";
+
+            }
+        }
+         
+        try {
+            $resultado = $this->modelVentas->consultarArray($sql); 
+            
+        }catch(Exception $e){
+            echo "Error consultar";
+            var_dump($e);
+        }
+
+        return $resultado;
+    }        
     
 
 }
