@@ -95,6 +95,60 @@ Class GstVentas{
         return $datos;
 
     }
+
+    public function addProductCarrito($data){
+        
+        $idProd = $data['idProduct'];
+        $cantProd = $data['cantProduct'];
+
+        $sql = " SELECT vnt_cant_prod FROM ventas WHERE id_prod = ".$idProd;
+        $datos = $this->modelVentas->consultarArray($sql);
+
+        if($datos[0]['vnt_cant_prod'] < $cantProd){
+            $respuesta = false;
+        }else{
+            
+            if(!isset( $_SESSION['ProductsTienda'] )) {
+
+                $_SESSION['ProductsTienda'] = true;
+                $respuesta = $this->addUpdatedCarritoCompras($idProd,$cantProd);
+            }else{
+                
+               $respuesta = $this->addUpdatedCarritoCompras($idProd,$cantProd);
+
+            }                
+        }
+        return $respuesta;
+
+    }
+
+    public function addUpdatedCarritoCompras($id_prod,$cant){
+
+        $sql = " SELECT prod_cantidad FROM productos_carrito_tienda WHERE id_prod =".$id_prod;
+        $datos = $this->modelVentas->consultarArray($sql);
+        
+        if($datos){
+
+            $sql = " SELECT vnt_cant_prod, max(vnt_cant_prod) as total FROM ventas WHERE id_prod = ".$id_prod;
+            $cantDisponible = $this->modelVentas->consultarArray($sql);
+            
+            $cant = $datos[0]['prod_cantidad'] + $cant;
+
+            if($cantDisponible[0]['vnt_cant_prod'] < $cant){
+                $cant = $cantDisponible[0]['total'];
+            }
+
+            $sql = " UPDATE productos_carrito_tienda SET prod_cantidad = ".$cant." WHERE id_prod = ".$id_prod." AND id_usuario = ".$_SESSION['id'];
+            $resultado = $this->modelVentas->editar($sql);
+
+        }else{
+            
+            $id = $_SESSION["id"];
+            $sql = " INSERT INTO productos_carrito_tienda VALUES( 0,$id_prod,$cant,$id)";
+            $resultado = $this->modelVentas->insertar($sql);   
+        }
+        return $resultado;
+    }
     
     public function postVentaProductoAsesor($data){
 
@@ -142,7 +196,7 @@ Class GstVentas{
                 // Venta por venta
                 $sql = " SELECT P.ruta_img, P.prod_nombre, P.prod_referencia, VA.prod_prec, VA.cant_prod, VA.total_venta, (VA.total_venta*$comision) as comision, U.nombre FROM ventas_asesor VA INNER JOIN producto P ON P.id_prod = VA.id_prod INNER JOIN usuario U ON U.id = VA.usuario_id WHERE VA.usuario_id = $id_usuario ";
             }else {
-                $sql = " SELECT VA.usuario_id, SUM(VA.total_venta) as totalventa, SUM(VA.total_venta*0.05) comision, U.nombre FROM ventas_asesor VA INNER JOIN usuario U ON U.id = VA.usuario_id WHERE VA.usuario_id = $id_usuario ORDER BY 1 ";
+                $sql = " SELECT VA.usuario_id, SUM(VA.total_venta) as totalventa, SUM(VA.total_venta*$comision) comision, U.nombre FROM ventas_asesor VA INNER JOIN usuario U ON U.id = VA.usuario_id WHERE VA.usuario_id = $id_usuario ORDER BY 1 ";
 
             }
         }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-03-2023 a las 01:17:35
+-- Tiempo de generación: 19-04-2023 a las 01:09:21
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 7.4.30
 
@@ -43,7 +43,8 @@ INSERT INTO `areas` (`id`, `nombre`) VALUES
 (6, 'Proyectos'),
 (7, 'Servicios'),
 (8, 'Calidad'),
-(9, 'Consumidor');
+(9, 'Consumidor'),
+(10, 'Ventas');
 
 -- --------------------------------------------------------
 
@@ -157,6 +158,27 @@ INSERT INTO `producto` (`id_prod`, `prod_nombre`, `prod_referencia`, `prod_preci
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `productos_carrito_tienda`
+--
+
+CREATE TABLE `productos_carrito_tienda` (
+  `id` int(11) NOT NULL,
+  `id_prod` int(11) NOT NULL,
+  `prod_cantidad` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `productos_carrito_tienda`
+--
+
+INSERT INTO `productos_carrito_tienda` (`id`, `id_prod`, `prod_cantidad`, `id_usuario`) VALUES
+(1, 82, 6, 15),
+(2, 77, 1, 15);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `roles`
 --
 
@@ -178,7 +200,8 @@ INSERT INTO `roles` (`id`, `nombre`) VALUES
 (8, 'Codirector'),
 (9, 'Profesor'),
 (10, 'Estudiante'),
-(11, 'Consumidor');
+(11, 'Consumidor'),
+(12, 'Asesor De Ventas');
 
 -- --------------------------------------------------------
 
@@ -208,8 +231,9 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`id`, `nombre`, `email`, `sexo`, `area_id`, `num_documento`, `num_telefono`, `direccion`, `ciudad`, `rol`, `ruta_img`, `semestre`, `password`) VALUES
 (15, 'Javier Andrés Rojas Erazo', 'jare_123@hotmail.es', 'M', 2, '123456789', '3173280247', 'Calle 46 # 10-51', 1, 1, 'img/imgCargarUsuarios/img_18215356.jpg', '', '12345'),
-(16, 'Maria Alejandra Guevara', 'alejandra2255@gmail.com', 'F', 8, '123456789', '3205521463', 'Calle 46 # 10-51', 5, 2, 'img/imgCargarUsuarios/usuario_sin_foto.jpg', '', '12345'),
-(17, 'Maria Eliza Erazo Tovar', 'eliza180970@gmail.com', 'F', 9, '21232245', '3122135465', 'Calle 46 # 10-51', 1, 11, 'img/imgCargarUsuarios/usuario_sin_foto.jpg', '', '12345');
+(16, 'Maria Alejandra Guevara', 'alejandra2255@gmail.com', 'F', 10, '123456789', '3205521463', 'Calle 46 # 10-51', 5, 12, 'img/imgCargarUsuarios/usuario_sin_foto.jpg', '', '12345'),
+(17, 'Maria Eliza Erazo Tovar', 'eliza180970@gmail.com', 'F', 9, '21232245', '3122135465', 'Calle 46 # 10-51', 1, 11, 'img/imgCargarUsuarios/usuario_sin_foto.jpg', '', '12345'),
+(19, 'usuario', 'usuarioprueba@gmail.com', 'M', 2, '123456789', '1', '1', 1, 12, 'img/imgCargarUsuarios/usuario_sin_foto.jpg', '', '12345');
 
 -- --------------------------------------------------------
 
@@ -235,8 +259,34 @@ INSERT INTO `ventas` (`id_vent`, `id_prod`, `prod_ref`, `prod_prec`, `vnt_cant_p
 (43, 78, '56234112', 5000, '1', 'A'),
 (42, 77, '45128445', 2000, '2', 'A'),
 (47, 83, '784236AHSA', 12000, '4', 'A'),
-(49, 81, '4551123546', 15000, '3', 'A'),
+(49, 81, '4551123546', 15000, '6', 'A'),
 (48, 79, '451125ADDA', 25000, '10', 'A');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ventas_asesor`
+--
+
+CREATE TABLE `ventas_asesor` (
+  `id` int(11) NOT NULL,
+  `id_prod` int(11) NOT NULL,
+  `prod_referencia` text COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `prod_prec` int(11) NOT NULL,
+  `cant_prod` int(11) NOT NULL,
+  `total_venta` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `ventas_asesor`
+--
+
+INSERT INTO `ventas_asesor` (`id`, `id_prod`, `prod_referencia`, `prod_prec`, `cant_prod`, `total_venta`, `usuario_id`) VALUES
+(6, 81, '4551123546', 15000, 2, 30000, 19),
+(7, 78, '56234112', 5000, 4, 20000, 19),
+(8, 78, '56234112', 5000, 3, 15000, 16),
+(9, 77, '45128445', 2000, 1, 2000, 16);
 
 --
 -- Índices para tablas volcadas
@@ -273,6 +323,12 @@ ALTER TABLE `producto`
   ADD PRIMARY KEY (`id_prod`);
 
 --
+-- Indices de la tabla `productos_carrito_tienda`
+--
+ALTER TABLE `productos_carrito_tienda`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `roles`
 --
 ALTER TABLE `roles`
@@ -282,13 +338,20 @@ ALTER TABLE `roles`
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `usuario_ibfk_1` (`area_id`);
 
 --
 -- Indices de la tabla `ventas`
 --
 ALTER TABLE `ventas`
   ADD PRIMARY KEY (`id_vent`);
+
+--
+-- Indices de la tabla `ventas_asesor`
+--
+ALTER TABLE `ventas_asesor`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -298,7 +361,7 @@ ALTER TABLE `ventas`
 -- AUTO_INCREMENT de la tabla `areas`
 --
 ALTER TABLE `areas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `asignaturas`
@@ -325,22 +388,34 @@ ALTER TABLE `producto`
   MODIFY `id_prod` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
+-- AUTO_INCREMENT de la tabla `productos_carrito_tienda`
+--
+ALTER TABLE `productos_carrito_tienda`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
   MODIFY `id_vent` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+
+--
+-- AUTO_INCREMENT de la tabla `ventas_asesor`
+--
+ALTER TABLE `ventas_asesor`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Restricciones para tablas volcadas

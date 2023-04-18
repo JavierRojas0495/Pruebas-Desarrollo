@@ -200,25 +200,36 @@ function modalShop(id_product) {
 
 
 $(".add-product").on("click", function () {
-
-
+    alert("Product");
     let cantProduct = cantProd.value;
-    let Id = productId.value
+    let idProd = productId.value
 
-    if (localStorage.length == 0) {
-        localStorage.setItem(1, { "idProduct": Id, "cantProduct": cantProduct });
-    } else {
+    data = {
+        "idProduct": idProd,
+        "cantProduct": cantProduct
+    };
 
-        for (let x = 0; x < localStorage.length; x++) {
-            data = localStorage.getItem(localStorage.key(x));
-            console.log(data);
+    $.ajax({
+        type: "GET",
+        url: "ajax.php?modulo=Ventas&controlador=Ventas&funcion=agregarProductosCarrito",
+        data: data,
+        success: function (result) {
+
+            if (result == "false") {
+                alertProcess('Ocurrio un problema', 'Sin Unidades Dispobibles', 'info');
+                //console.log(result);
+            } else {
+                alertProcess('Notificación', 'Producto agregado al carrito', 'success');
+                $('#modalAddCart').modal('hide');
+
+            }
+
+        }, error: function (result) {
+            alertProcess('Notificación', "Ocurrio un error", 'error');
+            console.log(result);
+            setTimeout('document.location.reload()', 2000);
         }
-
-        //i = localStorage.length
-        //localStorage.setItem(i + 1, { "idProduct": Id, "cantProduct": cantProduct });
-    }
-
-
+    });
 
 });
 

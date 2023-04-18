@@ -86,4 +86,10 @@ class VentasController{
         $tipo = $_GET['tipo'];
         include_once '../view/Ventas/Ventas/vistaTableComisiones.php';
     }
+
+    public function agregarProductosCarrito() {
+
+        $productos = $this->gstVentas->addProductCarrito($_GET);
+        echo json_encode($productos);
+    }
 }
