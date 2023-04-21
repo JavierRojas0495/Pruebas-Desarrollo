@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-04-2023 a las 01:09:21
+-- Tiempo de generación: 21-04-2023 a las 10:14:39
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 7.4.30
 
@@ -20,6 +20,26 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `prueba_tecnica_dev`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `archivos`
+--
+
+CREATE TABLE `archivos` (
+  `id` int(11) NOT NULL,
+  `nombre` text COLLATE utf8_spanish_ci NOT NULL,
+  `descripcion` text COLLATE utf8_spanish_ci NOT NULL,
+  `ruta_archivo` text COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `archivos`
+--
+
+INSERT INTO `archivos` (`id`, `nombre`, `descripcion`, `ruta_archivo`) VALUES
+(6, 'Cv Javier Rojas', 'Hoja de vida LinkedIn ', 'pdf/pdf_21101259.pdf');
 
 -- --------------------------------------------------------
 
@@ -231,8 +251,6 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`id`, `nombre`, `email`, `sexo`, `area_id`, `num_documento`, `num_telefono`, `direccion`, `ciudad`, `rol`, `ruta_img`, `semestre`, `password`) VALUES
 (15, 'Javier Andrés Rojas Erazo', 'jare_123@hotmail.es', 'M', 2, '123456789', '3173280247', 'Calle 46 # 10-51', 1, 1, 'img/imgCargarUsuarios/img_18215356.jpg', '', '12345'),
-(16, 'Maria Alejandra Guevara', 'alejandra2255@gmail.com', 'F', 10, '123456789', '3205521463', 'Calle 46 # 10-51', 5, 12, 'img/imgCargarUsuarios/usuario_sin_foto.jpg', '', '12345'),
-(17, 'Maria Eliza Erazo Tovar', 'eliza180970@gmail.com', 'F', 9, '21232245', '3122135465', 'Calle 46 # 10-51', 1, 11, 'img/imgCargarUsuarios/usuario_sin_foto.jpg', '', '12345'),
 (19, 'usuario', 'usuarioprueba@gmail.com', 'M', 2, '123456789', '1', '1', 1, 12, 'img/imgCargarUsuarios/usuario_sin_foto.jpg', '', '12345');
 
 -- --------------------------------------------------------
@@ -291,6 +309,12 @@ INSERT INTO `ventas_asesor` (`id`, `id_prod`, `prod_referencia`, `prod_prec`, `c
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `archivos`
+--
+ALTER TABLE `archivos`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `areas`
@@ -356,6 +380,12 @@ ALTER TABLE `ventas_asesor`
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
+
+--
+-- AUTO_INCREMENT de la tabla `archivos`
+--
+ALTER TABLE `archivos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `areas`

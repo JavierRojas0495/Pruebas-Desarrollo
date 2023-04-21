@@ -75,7 +75,7 @@
 
             <li class="nav-item"> -->
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVentaProductos"
-                    aria-expanded="true" aria-controls="collapseVenta">
+                    aria-expanded="true" aria-controls="collapseVentaProductos">
                     <i class="fas fa-cash-register"></i>
                     <span>Ventas Productos</span>
                 </a>
@@ -89,15 +89,29 @@
 
 
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVentaUsers"
-                    aria-expanded="true" aria-controls="collapseVenta">
+                    aria-expanded="true" aria-controls="collapseVentaUsers">
                     <i class="fas fa-address-card"></i>
                     <span>Ventas Asesores</span>
                 </a>
-                <div id="collapseVentaUsers" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
+                <div id="collapseVentaUsers" class="collapse" aria-labelledby="headingFour" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Modulo De Ventas:</h6>
                         <a class="collapse-item" href="<?php echo getUrl("Ventas", "Ventas", "registrarVentas"); ?>">Registrar Ventas</a>
                         <a class="collapse-item" href="<?php echo getUrl("Ventas", "Ventas", "vistaCalcularComisiones"); ?>">Calcular Comisiones</a>
+                    </div>
+                </div>
+
+
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCargarArchivos"
+                    aria-expanded="true" aria-controls="collapseCargarArchivos">
+                    <i class="fas fa-address-card"></i>
+                    <span>Guardar Archivos PDF</span>
+                </a>
+                <div id="collapseCargarArchivos" class="collapse" aria-labelledby="headingFive" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Modulo Cargue Archivos:</h6>
+                        <a class="collapse-item" href="<?php echo getUrl("Archivos", "Archivos", "subirNuevoArchivo"); ?>"> Subir Nuevo PDF</a>
+                        <a class="collapse-item" href="<?php echo getUrl("Archivos", "Archivos", "listarArchivos"); ?>">Listar PDF's</a>
                     </div>
                 </div>
 
