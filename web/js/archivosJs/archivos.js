@@ -17,7 +17,7 @@ function validaCampoVacio(valor) {
     }
 }
 
-function inputFile(file) {
+function inputFile() {
     ext = $('input[type="file"]').val().split('.').pop();
 
     var fileInput = document.getElementById('pdf');
@@ -63,7 +63,7 @@ function postRegistrarPDF() {
     let nombreArc = document.getElementById('nombre').value;
     let descripcion = document.getElementById('descripcion').value;
     let fileInput = document.getElementById('pdf').value;
-
+    console.log(fileInput);
     if (validaCampoVacio(nombreArc)) {
         document.getElementById('nombre').focus();
         alertProcess('Notificación', "El campo nombre no puede estar vacio", 'error');
@@ -77,16 +77,12 @@ function postRegistrarPDF() {
     }
 
     if (validaCampoVacio(fileInput)) {
-        document.getElementById('archivo').focus();
+        //document.getElementById('pdf').focus();
+        document.getElementById('pdf').style.color = "#FF0000";
         alertProcess('Notificación', "El campo archivo no puede estar vacio", 'error');
         return false;
     }
 
-    if (inputFile(fileInput)) {
-        document.getElementById('archivo').focus();
-        alertProcess('Notificación', "El campo archivo no puede modificarse", 'error');
-        return false;
-    }
     uploadFiles("pdf", "formRegistrarArchivo")
         .then((pathFile) => {
             postRegistroArchivo(nombreArc, descripcion, pathFile);

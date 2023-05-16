@@ -14,7 +14,7 @@
              
             <div class="form-group col-xl-5 col-md-5">
                 <label>Archivo PDF (*) </label>
-                <input type="file" name="pdf" id="pdf" class="form-control-file" accept="application/pdf" onchange="inputFile(this)">
+                <input type="file" name="pdf" id="pdf" class="form-control-file" accept="application/pdf" onchange="inputFile()">
                 <p class="help-block">Seleccionar Archivo PDF.</p>
             </div>
 

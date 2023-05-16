@@ -48,4 +48,5 @@ class ArchivosController{
         $archivo = $this->gstArchivos->consultarArchivoId($_GET['id']);
         include_once '../view/Archivos/Archivos/verDocumentoPDF.php';
     }
+    
 }

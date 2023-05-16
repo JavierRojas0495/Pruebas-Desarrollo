@@ -3,7 +3,7 @@
     <a class='btn btn-success' href="<?php echo getUrl("Archivos", "Archivos", "listarArchivos"); ?>" >Regresar</a></button>
 </div>
 <div class="form-group">
-    <h1 class="page-header"> Ver verDocumento PDF </h1>
+    <h1 class="page-header"> Ver Documento PDF </h1>
 </div>
 
 <div>
