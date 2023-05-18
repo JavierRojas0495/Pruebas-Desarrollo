@@ -115,6 +115,20 @@
                     </div>
                 </div>
 
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProcesosEventos"
+                    aria-expanded="true" aria-controls="collapseProcesosEventos">
+                    <i class="fas fa-address-card"></i>
+                    <span>Procesos Eventos</span>
+                </a>
+                <div id="collapseProcesosEventos" class="collapse" aria-labelledby="headingSix" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Modulo Procesos / Eventos:</h6>
+                        <a class="collapse-item" href="<?php echo getUrl("Evento", "Evento", "crearEvento"); ?>"> Crear </a>
+                        <a class="collapse-item" href="<?php echo getUrl("Evento", "Evento", "listarEvento"); ?>"> Listar </a>
+                        <a class="collapse-item" href="<?php echo getUrl("Evento", "Evento", "listarEventosInforme"); ?>"> Buscar </a>
+                    </div>
+                </div>
+
             </li>
 
             <!-- Divider -->

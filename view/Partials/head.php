@@ -24,7 +24,8 @@
     <link href="css/nav.css" rel="stylesheet">
     <link href="css/carritoCompras.css" rel="stylesheet">
     <!-- DataTable styles for this template -->
-    <link rel="stylesheet" type="text/css" href="js/DataTables/datatables.min.css"/>
+    <!-- <link rel="stylesheet" type="text/css" href="js/DataTables/datatables.min.css"/> -->
+    <link type="text/css" href="js/DataTables/datatables.min.css" rel="stylesheet"/>
     <!-- End DataTables styles for this template -->
     
     
