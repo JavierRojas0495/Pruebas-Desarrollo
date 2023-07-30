@@ -17,8 +17,7 @@ Class GstUsuario{
             $sql=" SELECT id, nombre, email, sexo, area_id, num_documento, num_telefono, direccion, ciudad, rol, semestre FROM usuario WHERE id =".$id;
             $datos = $this->modelUsuario->consultarArray($sql);
         }catch(Exception $e){
-            echo "Error al consultar Usuario";
-            
+            echo "Error: ".$e->getMessage();    
         }
         
         return $datos;
@@ -47,7 +46,7 @@ Class GstUsuario{
                 $respuesta = $this->modelUsuario->editar($sql);
                 $resultado = true;
             }catch(Exception $e){
-                echo "Error al editar";
+                echo "Error: ".$e->getMessage();    
             }
             
         }else{
@@ -93,7 +92,7 @@ Class GstUsuario{
             $resultado = $this->modelUsuario->insertar($sql); 
             return $resultado;
         }catch(Exception $e){
-            echo "Error al insertar";
+            echo "Error: ".$e->getMessage();
         }        
     }
 
@@ -111,7 +110,7 @@ Class GstUsuario{
         try{
             $resultado = $this->modelUsuario->eliminar($sql);
         }catch(Exception $e){
-            echo "Error al eliminar";
+            echo "Error: ".$e->getMessage();
         }
         return $resultado;
         
@@ -131,7 +130,7 @@ Class GstUsuario{
             $sql=" SELECT id, nombre FROM usuario WHERE rol = 12 ";
             $datos = $this->modelUsuario->consultarArray($sql);
         }catch(Exception $e){
-            echo "Error al consultar Usuario";
+            echo "Error: ".$e->getMessage();
         }
         
         return $datos;

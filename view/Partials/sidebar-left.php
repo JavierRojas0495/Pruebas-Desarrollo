@@ -129,6 +129,21 @@
                     </div>
                 </div>
 
+
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMascotas"
+                    aria-expanded="true" aria-controls="collapseMascotas">
+                    <i class="fas fa-dog"></i>
+                    <span> Mascotas </span>
+                </a>
+                <div id="collapseMascotas" class="collapse" aria-labelledby="headingSix" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Modulo Mascotas:</h6>
+                        <a class="collapse-item" href="<?php echo getUrl("Mascota", "Mascota", "registrarMascota"); ?>"> Registrar Mascota </a>
+                        <a class="collapse-item" href="<?php echo getUrl("Mascota", "Mascota", "listarMascotas"); ?>"> Listar </a>
+                    </div>
+                </div>
+
+
             </li>
 
             <!-- Divider -->

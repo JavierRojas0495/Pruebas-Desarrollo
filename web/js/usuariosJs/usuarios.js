@@ -279,7 +279,7 @@ function postUsuario($ejecutar) {
     } else {
       uploadFile("imgCargarUsuarios", "formCrearUsuario")
         .then((pathImg) => {
-          console.log(pathImg);
+          //console.log(pathImg);
           postCrearUsuario(nombre, correo, sexo, area, numero_documento, numero_telefono, direccion, ciudad, rol, numero_semestre, pathImg);
         });
     }

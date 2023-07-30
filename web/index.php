@@ -7,13 +7,17 @@ session_start();
      
 ?>
 <body>
+    
     <div id="wrapper">
+        
         <!-- Navigation -->
         <?php
             include_once '../view/Partials/sidebar-left.php';
         ?>
-        <div class="container-fluid d-flex flex-column" id="content-wrapper">
-            <?php include_once '../view/Partials/navbar.php'; ?>
+        <div class="container-fluid " id="content-wrapper">
+        <?php include_once '../view/Partials/navbar.php'; ?>
+        <div class="container d-flex flex-column col-lg-12 mx-3">
+            
             <div id="page-wrapper">
                 
                 <?php
@@ -39,12 +43,14 @@ session_start();
                 ?>
             
                 <!-- /.row -->
+                </div><!-- container d-flex -->
             </div>
             <!-- /#page-wrapper -->
         </div>
         <!-- /#page-container -->
     </div>
     <!-- /#wrapper -->
+    
 <?php
         include_once '../view/Partials/footer.php';
 ?>

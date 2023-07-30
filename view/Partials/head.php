@@ -23,6 +23,7 @@
     <link href="css/estilosPropios.css" rel="stylesheet"> 
     <link href="css/nav.css" rel="stylesheet">
     <link href="css/carritoCompras.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <!-- DataTable styles for this template -->
     <!-- <link rel="stylesheet" type="text/css" href="js/DataTables/datatables.min.css"/> -->
     <link type="text/css" href="js/DataTables/datatables.min.css" rel="stylesheet"/>
