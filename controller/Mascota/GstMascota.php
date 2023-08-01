@@ -20,7 +20,7 @@ Class GstMascota{
 
     public function getClientesMascota(){
         
-        $sql ="SELECT id,nombre FROM usuario where area_id = 9";
+        $sql ="SELECT id,nombre FROM usuario where rol = 11 ";
         $datos = $this->modelMascota->consultarArray($sql);
         return $datos;
     }

@@ -143,6 +143,19 @@
                     </div>
                 </div>
 
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVeterinaria"
+                    aria-expanded="true" aria-controls="collapseVeterinaria">
+                    <i class="fas fa-clinic-medical"></i>
+                    <span> Historias Clinicas </span>
+                </a>
+                <div id="collapseVeterinaria" class="collapse" aria-labelledby="headingSix" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Modulo Historia Clinica:</h6>
+                        <a class="collapse-item" href="<?php echo getUrl("HistoriaClinica", "HistoriaClinica", "registrarHistoriaClinica"); ?>"> Crear Historia Clinica </a>
+                        <a class="collapse-item" href="<?php echo getUrl("HistoriaClinica", "HistoriaClinica", "listarHistoriaClinica"); ?>"> Listar </a>
+                    </div>
+                </div>
+
 
             </li>
 

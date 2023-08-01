@@ -239,7 +239,7 @@ function eliminarMascota(id){
           success:function(respuesta){
           
             alertProcess('Notificación',"Se elimino el registro",'success');
-            url = 'index.php?modulo=Mascota&controlador=Mascota&funcion=listarMascota';
+            url = 'index.php?modulo=Mascota&controlador=Mascota&funcion=listarMascotas';
             setTimeout("redireccionarPagina('"+url+"')", 1000);
           
 

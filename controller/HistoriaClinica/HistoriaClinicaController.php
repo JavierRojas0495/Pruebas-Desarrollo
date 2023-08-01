@@ -1,50 +1,55 @@
 <?php
-include_once '../model/Asignatura/AsignaturaModel.php';
-include_once 'GstAsignatura.php';
+include_once 'GstHistoriaClinica.php';
 
-class AsignaturaController{
+class HistoriaClinicaController{
 
-    private $modelAsignatura;
- 	
+    private $gstHistoriaClinica;
  	
  	function __construct(){
- 		$this->gstAsignatura = new GstAsignatura();
+ 		$this->gstHistoriaClinica = new GstHistoriaClinica();
  	}
+    
+    public function registrarHistoriaClinica(){
 
-    public function registrarAsignatura(){
-
-        $datos = $this->gstAsignatura->getAreas();
-        include_once '../view/Asignatura/Asignatura/registrarAsignatura.php';
+        $mascotas = $this->gstHistoriaClinica->getMascotas();
+        $veterinarios = $this->gstHistoriaClinica->getVeterinarios();
+        include_once '../view/HistoriaClinica/HistoriaClinica/registrarHistoriaClinica.php';
     }
 
-    public function postRegistrarAsignatura(){
+    public function consultarMascotaRegistrada(){
+        $resultado = $this->gstHistoriaClinica->consultarMascotaRegistrada($_POST['id']);
+        echo json_encode($resultado);
 
-        $datos = $this->gstAsignatura->postRegistrarAsignatura($_POST);
-        return JSON_encode($datos);
     }
 
-    Public function listarAsignaturas(){
-        
-        $datos = $this->gstAsignatura->getAsignaturas();
-        include_once '../view/Asignatura/Asignatura/listarAsignaturas.php';
+    public function postRegistrarHistoriaClinica(){
+
+        $resultado = $this->gstHistoriaClinica->postRegistrarHistoriaClinica($_GET);
+        echo json_encode($resultado);
     }
 
-    public function postEliminarAsignatura(){
-        
-        $datos = $this->gstAsignatura->inabilitarAsignatura($_POST['id']);
-        return JSON_encode($datos);
+    public function postRegistrarDetalleHistoriaClinica(){
+
+        $resultado = $this->gstHistoriaClinica->postRegistrarDetalleHistoriaClinica($_GET);
+        echo json_encode($resultado);
     }
 
-    public function editarAsignatura(){ 
-        
-        $datosasignatura = $this->gstAsignatura->getAsignaturaId($_GET['id']);
-        $datos = $this->gstAsignatura->getAreas();
-        include_once '../view/Asignatura/Asignatura/editarAsignatura.php';
+    public function listarHistoriaClinica(){
+
+        $historiasClinicas = $this->gstHistoriaClinica->listarHistoriaClinica();
+        include_once '../view/HistoriaClinica/HistoriaClinica/listarHistoriaClinica.php';
     }
 
-    public function postEditarAsignatura(){
+    public function listarDetalleHistoriaClinicaMascota() {
 
-        $datos = $this->gstAsignatura->postEditarAsignatura($_GET);
-        return JSON_encode($datos);   
+        $DetalleshistorialClinico = $this->gstHistoriaClinica->listarDetalleHistoriaClinicaMascota($_GET['id']);
+        include_once '../view/HistoriaClinica/HistoriaClinica/listarHistoriaClinicaDetalleMascota.php';
     }
+
+    public function detallesNovedadHistoriaClinica() {
+
+        $detallehistoriaclinica = $this->gstHistoriaClinica->detallesNovedadHistoriaClinicaMascota($_GET['id']);
+        include_once '../view/HistoriaClinica/HistoriaClinica/detalleHistoriaClinica.php';
+    }
+
 }
