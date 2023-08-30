@@ -106,6 +106,7 @@
     <script src="../web/js/evento/evento.js"> </script>
     <script src="../web/js/mascotaJs/mascota.js"> </script>
     <script src="../web/js/historiaClinicaJs/historiaClinica.js"> </script>
+    <script src="../web/js/tareaJs/tareas.js"> </script>
     
     
     <!-- DataTables -->

@@ -156,6 +156,19 @@
                     </div>
                 </div>
 
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTareas"
+                    aria-expanded="true" aria-controls="collapseTareas">
+                    <i class="fas fa-clipboard-list"></i>
+                    <span> Tareas </span>
+                </a>
+                <div id="collapseTareas" class="collapse" aria-labelledby="headingSix" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header"> Modulo Tareas: </h6>
+                        <a class="collapse-item" href="<?php echo getUrl("Tareas", "Tareas", "registrarTarea"); ?>"> Registrar Nueva Tarea </a>
+                        <a class="collapse-item" href="<?php echo getUrl("Tareas", "Tareas", "listarTareas"); ?>"> Listar Tareas </a>
+                    </div>
+                </div>
+
 
             </li>
 

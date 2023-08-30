@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-04-2023 a las 10:14:39
--- Versión del servidor: 10.4.25-MariaDB
--- Versión de PHP: 7.4.30
+-- Tiempo de generación: 30-08-2023 a las 04:02:58
+-- Versión del servidor: 10.4.11-MariaDB
+-- Versión de PHP: 7.4.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -64,7 +65,8 @@ INSERT INTO `areas` (`id`, `nombre`) VALUES
 (7, 'Servicios'),
 (8, 'Calidad'),
 (9, 'Consumidor'),
-(10, 'Ventas');
+(10, 'Ventas'),
+(13, 'Veterinaria');
 
 -- --------------------------------------------------------
 
@@ -148,6 +150,99 @@ INSERT INTO `ciudades` (`id`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `detallehistoriaclinicaveterinaria`
+--
+
+CREATE TABLE `detallehistoriaclinicaveterinaria` (
+  `id_detalle` int(11) NOT NULL,
+  `id_historia_clinica` int(11) NOT NULL,
+  `id_veterinario` int(11) NOT NULL,
+  `peso_mascota` text NOT NULL,
+  `temperatura_mascota` text NOT NULL,
+  `frecuencia_cardiaca` text NOT NULL,
+  `observaciones_cliente` text NOT NULL,
+  `observaciones` text NOT NULL,
+  `fecha_historia_clinica` date NOT NULL,
+  `hora_historia_clinica` time NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `detallehistoriaclinicaveterinaria`
+--
+
+INSERT INTO `detallehistoriaclinicaveterinaria` (`id_detalle`, `id_historia_clinica`, `id_veterinario`, `peso_mascota`, `temperatura_mascota`, `frecuencia_cardiaca`, `observaciones_cliente`, `observaciones`, `fecha_historia_clinica`, `hora_historia_clinica`) VALUES
+(13, 40, 24, '65', '36', '120', 'No se mueve mucho', 'Se requiere realizar seguimiento a la frecuencia cardiaca', '2023-08-01', '21:44:12'),
+(14, 41, 21, '42', '38', '80', 'ninguna', 'Temperatura para tener en cuenta', '2023-08-01', '21:45:08');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `estados_tarea`
+--
+
+CREATE TABLE `estados_tarea` (
+  `id_estado` int(11) NOT NULL,
+  `nombre_estado` text COLLATE utf8mb4_spanish_ci NOT NULL,
+  `descripcion_estado` text COLLATE utf8mb4_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `estados_tarea`
+--
+
+INSERT INTO `estados_tarea` (`id_estado`, `nombre_estado`, `descripcion_estado`) VALUES
+(1, 'Pendiente', 'Inicio del estado de la tarea'),
+(2, 'Realizada', 'Se concluye una tarea'),
+(3, 'Cancelada', 'Se da fin a una tarea por algun motivo en especifico');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `historiaclinicaveterinaria`
+--
+
+CREATE TABLE `historiaclinicaveterinaria` (
+  `id_historia_clinica` int(11) NOT NULL,
+  `id_mascota` int(11) NOT NULL,
+  `fecha_creacion` date NOT NULL,
+  `fecha_actualizacion` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `historiaclinicaveterinaria`
+--
+
+INSERT INTO `historiaclinicaveterinaria` (`id_historia_clinica`, `id_mascota`, `fecha_creacion`, `fecha_actualizacion`) VALUES
+(40, 14, '2023-08-01', '2023-08-01'),
+(41, 13, '2023-08-01', '2023-08-01');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mascota`
+--
+
+CREATE TABLE `mascota` (
+  `id_mascota` int(11) NOT NULL,
+  `mascota_nombre` varchar(255) NOT NULL,
+  `mascota_sexo` varchar(10) NOT NULL,
+  `raza_id` int(11) NOT NULL,
+  `mascota_detalles` text NOT NULL,
+  `mascota_estado` varchar(10) NOT NULL,
+  `usuario_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `mascota`
+--
+
+INSERT INTO `mascota` (`id_mascota`, `mascota_nombre`, `mascota_sexo`, `raza_id`, `mascota_detalles`, `mascota_estado`, `usuario_id`) VALUES
+(13, 'Peluza', 'M', 51, 'Ninguna Novedad', 'A', 22),
+(14, 'Yogui', 'H', 48, 'Ninguna novedad', 'A', 23);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `producto`
 --
 
@@ -199,6 +294,75 @@ INSERT INTO `productos_carrito_tienda` (`id`, `id_prod`, `prod_cantidad`, `id_us
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `razamascotas`
+--
+
+CREATE TABLE `razamascotas` (
+  `id_raza` int(11) NOT NULL,
+  `raza_nombre` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `razamascotas`
+--
+
+INSERT INTO `razamascotas` (`id_raza`, `raza_nombre`) VALUES
+(1, 'Sabueso de transilvania'),
+(2, 'Morkie'),
+(3, 'Sabueso de Baviera'),
+(4, 'Lurcher'),
+(5, 'Perro esquimal canadiense o Canadian Eskimo Dog'),
+(6, 'Jack russell terrier'),
+(7, 'Bulldog frances'),
+(8, 'Bulldog continental'),
+(9, 'Affenpinscher'),
+(10, 'Afgano'),
+(11, 'Akita japonés'),
+(12, 'Basenji'),
+(13, 'Basset Azul de Gascuña'),
+(14, 'Basset Grifón vandeano (grande)'),
+(15, 'Basset Grifón vandeano (pequeño)'),
+(16, 'Basset Hound'),
+(17, 'Basset leonado de Bretaña'),
+(18, 'Beagle'),
+(19, 'Beauceron'),
+(20, 'Bedlington Terrier'),
+(21, 'Bergamasco'),
+(22, 'Yorkshire Terrier'),
+(23, 'Shih Tzu'),
+(24, 'Chihuahua'),
+(25, 'Beagle'),
+(26, 'Border Collie'),
+(27, 'Boston Terrier'),
+(28, 'Labrador Retriever'),
+(29, 'Pastor Alemán'),
+(30, 'Cocker Spaniel'),
+(31, 'Husky siberiano'),
+(32, 'Basenji'),
+(33, 'Basset Azul de Gascuña'),
+(34, 'Basset Grifón vandeano (grande)'),
+(35, 'Basset Grifón vandeano (pequeño)'),
+(36, 'Basset Hound'),
+(37, 'Basset leonado de Bretaña'),
+(38, 'Beagle'),
+(39, 'Beauceron'),
+(40, 'Bedlington Terrier'),
+(41, 'Bergamasco'),
+(42, 'Yorkshire Terrier'),
+(43, 'Shih Tzu'),
+(44, 'Chihuahua'),
+(45, 'Beagle'),
+(46, 'Border Collie'),
+(47, 'Boston Terrier'),
+(48, 'Labrador Retriever'),
+(49, 'Pastor Alemán'),
+(50, 'Cocker Spaniel'),
+(51, 'Husky siberiano'),
+(52, 'Otra raza');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `roles`
 --
 
@@ -222,6 +386,31 @@ INSERT INTO `roles` (`id`, `nombre`) VALUES
 (10, 'Estudiante'),
 (11, 'Consumidor'),
 (12, 'Asesor De Ventas');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tarea`
+--
+
+CREATE TABLE `tarea` (
+  `id_tarea` int(11) NOT NULL,
+  `nombre_tarea` varchar(255) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `tiempo_tarea` varchar(100) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `objetivos_tarea` text COLLATE utf8mb4_spanish_ci NOT NULL,
+  `descripcion_tarea` text COLLATE utf8mb4_spanish_ci NOT NULL,
+  `fechacreacion_tarea` date NOT NULL,
+  `fechamodificacion_tarea` date NOT NULL,
+  `id_estado` int(100) NOT NULL,
+  `id_usuario` int(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `tarea`
+--
+
+INSERT INTO `tarea` (`id_tarea`, `nombre_tarea`, `tiempo_tarea`, `objetivos_tarea`, `descripcion_tarea`, `fechacreacion_tarea`, `fechamodificacion_tarea`, `id_estado`, `id_usuario`) VALUES
+(11, 'Prueba', '1', 'Registro Exitoso', 'Registro', '2023-08-30', '2023-08-30', 2, 15);
 
 -- --------------------------------------------------------
 
@@ -341,6 +530,30 @@ ALTER TABLE `ciudades`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `detallehistoriaclinicaveterinaria`
+--
+ALTER TABLE `detallehistoriaclinicaveterinaria`
+  ADD PRIMARY KEY (`id_detalle`);
+
+--
+-- Indices de la tabla `estados_tarea`
+--
+ALTER TABLE `estados_tarea`
+  ADD PRIMARY KEY (`id_estado`);
+
+--
+-- Indices de la tabla `historiaclinicaveterinaria`
+--
+ALTER TABLE `historiaclinicaveterinaria`
+  ADD PRIMARY KEY (`id_historia_clinica`);
+
+--
+-- Indices de la tabla `mascota`
+--
+ALTER TABLE `mascota`
+  ADD PRIMARY KEY (`id_mascota`);
+
+--
 -- Indices de la tabla `producto`
 --
 ALTER TABLE `producto`
@@ -353,10 +566,22 @@ ALTER TABLE `productos_carrito_tienda`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `razamascotas`
+--
+ALTER TABLE `razamascotas`
+  ADD PRIMARY KEY (`id_raza`);
+
+--
 -- Indices de la tabla `roles`
 --
 ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `tarea`
+--
+ALTER TABLE `tarea`
+  ADD PRIMARY KEY (`id_tarea`);
 
 --
 -- Indices de la tabla `usuario`
@@ -391,7 +616,7 @@ ALTER TABLE `archivos`
 -- AUTO_INCREMENT de la tabla `areas`
 --
 ALTER TABLE `areas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `asignaturas`
@@ -412,6 +637,12 @@ ALTER TABLE `ciudades`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT de la tabla `estados_tarea`
+--
+ALTER TABLE `estados_tarea`
+  MODIFY `id_estado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
@@ -428,6 +659,12 @@ ALTER TABLE `productos_carrito_tienda`
 --
 ALTER TABLE `roles`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT de la tabla `tarea`
+--
+ALTER TABLE `tarea`
+  MODIFY `id_tarea` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
