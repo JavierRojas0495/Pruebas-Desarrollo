@@ -95,7 +95,7 @@ $(document).ready(function () {
 
         case 1: postRegistrarTarea(nom_tarea,time_tarea,objetivos,descripcion);
         break;
-        case 2: postRegistrarTarea(nom_tarea,time_tarea,objetivos,descripcion);
+        case 2: postEditarTarea(nom_tarea,time_tarea,objetivos,descripcion);
         break;
 
         default:
@@ -167,7 +167,7 @@ function eliminarTarea(id){
               url = 'index.php?modulo=Tareas&controlador=Tareas&funcion=listarTareas';
               setTimeout("redireccionarPagina('"+url+"')", 1000);
             }else{
-              alertProcess('Notificación',"No se pudo eliminar",'error');
+              alertProcess('Notificación',"La tarea ya se encuentra Realizada",'error');
               setTimeout('document.location.reload()',2000);
             }
             
@@ -220,8 +220,8 @@ function eliminarTarea(id){
       });
   }
 
-  /*
-  function editarAsignatura(id){
+  
+  function editarTarea(id){
     
     Swal.fire({
       title: 'seguro quieres editar?',
@@ -233,37 +233,41 @@ function eliminarTarea(id){
       confirmButtonText: 'Si, editar esto!'
         }).then((result) => {
           if (result.isConfirmed) {
-            editarAsignaturaid(id);
+            vistaEditarTarea(id);
             return false;
           }
     })
   }
 
-  function editarAsignaturaid(id){  
+  function vistaEditarTarea(id){  
 
-    var url = "index.php?modulo=Asignatura&controlador=Asignatura&funcion=editarAsignatura&id="+id;
+    var url = "index.php?modulo=Tareas&controlador=Tareas&funcion=editarTarea&id="+id;
     setTimeout("redireccionarPagina('"+url+"')", 500);
   }
 
-  function postEditarAsignatura(id_asig,nom_asig,area,descripcion,creditos,nivel,estado){
+  function postEditarTarea(nom_tarea,time_tarea,objetivos,descripcion){
     
-      let data = {"id": id_asig,
-                  "nombre" : nom_asig,
-                  "area" : area,
-                  "descripcion" : descripcion,
-                  "creditos" : creditos,
-                  "nivel" : nivel,
-                  "estado" : estado
-            };
-      console.log(data);
+    let id = document.getElementById('id').value;
+    
+    if (id <= 0 ||validaCampoVacio(id) || isNumeric(id)) {
+        alertProcess('Notificación', "El identificador no puede estar vacio", 'error');
+        setTimeout('document.location.reload()',2000);
+    }
+
+    let data = { "id" : id, 
+                 "nombre" : nom_tarea,
+                 "tiempo" : time_tarea,
+                 "objetivos" : objetivos,
+                 "descripcion" : descripcion
+                };
+      
       $.ajax({
-            type:"GET",
-            url: "index.php?modulo=Asignatura&controlador=Asignatura&funcion=postEditarAsignatura",
+            type:"POST",
+            url: "ajax.php?modulo=Tareas&controlador=Tareas&funcion=postEditarTarea",
             data: data,
             success:function(result){
                 alertProcess('Notificación',"Se edito correctamente",'success');
-                
-                url = 'index.php?modulo=Asignatura&controlador=Asignatura&funcion=listarAsignaturas';
+                url = 'index.php?modulo=Tareas&controlador=Tareas&funcion=listarTareas';
                 setTimeout("redireccionarPagina('"+url+"')", 1000);
                 
                    
@@ -273,4 +277,47 @@ function eliminarTarea(id){
             }
         });
   }
-  */
+
+  function CancelarTarea(id){
+    
+    var id_dato = id;
+      Swal.fire({
+        title: 'seguro quieres cancelar el estado?',
+        text: "No podras revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, cancelar estado!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              postCancelarEstado(id_dato);
+            }
+      })
+  }
+
+
+  function postCancelarEstado(id){
+
+    
+    $.ajax({
+          type:"POST",
+          url:"ajax.php?modulo=Tareas&controlador=Tareas&funcion=postCancelarTarea",
+          data:"id="+id,
+          success:function(respuesta){
+            
+            if(respuesta == "true"){
+              alertProcess('Notificación',"Se Cancelo la tarea",'success');
+              url = 'index.php?modulo=Tareas&controlador=Tareas&funcion=listarTareas';
+              setTimeout("redireccionarPagina('"+url+"')", 1000);
+            }else{
+              alertProcess('Notificación',"La tarea ya se encuentra Realizada o Cancelada",'error');
+              setTimeout('document.location.reload()',2000);
+            }
+            
+          },error:function(respuesta){
+              alertProcess('Notificación',"Ocurrio un error",'error');
+          }
+      });
+  }
+  

@@ -31,7 +31,7 @@
                         echo "<td>".$value['creacion']."</td>";
                         echo "<td>".$value['modificacion']."</td>";
                         echo "<td>".$value['estado']."</td>";
-                        echo "<td> <input type='button' class='btn btn-success' value='Editar' onclick='verDetalles(".$value['id'].");'>";
+                        echo "<td> <input type='button' class='btn btn-success' value='Editar' onclick='editarTarea(".$value['id'].");'>";
                         echo " <input type='button' class='btn btn-danger' value='Eliminar' onclick='eliminarTarea(".$value['id'].");'>";
                         echo " <input type='button' class='btn btn-primary' value='Cambiar Estado' onclick='cambiarEstadoTarea(".$value['id'].");'>";
                         echo "</td>";

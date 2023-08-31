@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-08-2023 a las 04:02:58
+-- Tiempo de generación: 31-08-2023 a las 04:01:01
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.1
 
@@ -410,7 +410,8 @@ CREATE TABLE `tarea` (
 --
 
 INSERT INTO `tarea` (`id_tarea`, `nombre_tarea`, `tiempo_tarea`, `objetivos_tarea`, `descripcion_tarea`, `fechacreacion_tarea`, `fechamodificacion_tarea`, `id_estado`, `id_usuario`) VALUES
-(11, 'Prueba', '1', 'Registro Exitoso', 'Registro', '2023-08-30', '2023-08-30', 2, 15);
+(19, 'Prueba', '1', 'Registro Exitoso     ', 'Registro     ', '2023-08-31', '2023-08-31', 2, 15),
+(22, 'Registro tarea # 12', '4', 'Registro exitoso', 'Registro exitoso', '2023-08-31', '2023-08-31', 3, 15);
 
 -- --------------------------------------------------------
 
@@ -664,7 +665,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `tarea`
 --
 ALTER TABLE `tarea`
-  MODIFY `id_tarea` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_tarea` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
